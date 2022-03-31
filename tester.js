@@ -19,6 +19,10 @@ j = 0;
 b = 5.4;
 r = 5.8;
 m = -0.5;
+ione = 0;
+itwo = 0;
+a=0;
+
 t2 = [];
 
 /** Describes object (circle) drawn on canvas and its attributes. */
@@ -152,9 +156,11 @@ class Shape {
         b = 540;
         r = 300;
         m = -0.5;
-
+        ione = -Math.sqrt(-((j^2-h^2)/(2*j-2*h)-h)^2+r^2)+w;
+        itwo = -Math.sqrt(-((j^2-h^2)/(2*j-2*h)-h)^2+r^2)+w;
+       
         ctx.beginPath();
-        ctx.arc(h, w, r, (j ^ 2 - h ^ 2) / (2 * j - 2 * h), -(j ^ 2 - h ^ 2) / (2 * j - 2 * h));
+        ctx.arc(h, w, r, Math.PI, 1/2*Math.PI);
         //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
         ctx.stroke();
         ctx.closePath();
