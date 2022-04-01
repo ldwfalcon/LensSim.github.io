@@ -2,6 +2,8 @@ prevx = 0;
 prevy = 0;
 prevx2 = 0;
 prevy2 = 0;
+prevx3 = 0;
+prevy3 = 0;
 prevX = [];
 prevY = [];
 
@@ -21,10 +23,18 @@ r = 5.8;
 m = -0.5;
 ione = 0;
 itwo = 0;
-a=0;
+a = 0;
+top = 0;
+bottom = 0;
+xpos = 0;
+document.getElementById("demo").innerHTML = 0;
+document.getElementById("demo2").innerHTML = 0;
+
 
 t2 = [];
-
+function calcAngle(opposite, adjacent) {
+    return Math.atan(opposite / adjacent);
+}
 /** Describes object (circle) drawn on canvas and its attributes. */
 class Shape {
     constructor(x, y, radius, ax, ay, m, vx = 0, vy = 0) {
@@ -70,10 +80,14 @@ class Shape {
 
     }
     drawPath() {
-        ctx.strokeStyle = 'red';
+        let rows = 20;
+        let radius = 7.5;
+        let startX = Math.round(c.offsetWidth / 3);
+        let startY = Math.round(c.offsetHeight / 3);
+        ctx.strokeStyle = 'yellow';
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(70, 475);
+        ctx.moveTo(40, startY + radius * rows / 2);
 
         prevX.push(this.x)
         prevY.push(this.y)
@@ -91,8 +105,8 @@ class Shape {
              t = tempx.toLocaleString();
              ctx.lineTo(Math.abs(t), Math.abs(i))
          }**/
-        if (this.x > 450) {
-            if (this.x < 460) {
+        if (this.x > 440) {
+            if (this.x < 480) {
                 prevx = this.x;
                 prevy = this.y;
             }
@@ -101,21 +115,47 @@ class Shape {
             ctx.stroke();
 
         }
+        ctx.strokeStyle = 'red';
+        ctx.beginPath();
+
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
-        if (this.x > 460) {
+        if (this.x > 420) {
 
-
-            if (490 < this.x < 510) {
+            if (this.x < 780) {
                 prevx2 = this.x;
                 prevy2 = this.y;
+      
             }
-            ctx.lineTo(Math.abs(prevx2), Math.abs(prevy2))
+            ctx.lineTo(prevx2, prevy2);
+            console.log(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI);
+            document.getElementById("demo").innerHTML = Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI;
+
+            ctx.stroke();
+
+            ctx.closePath();
+        }
+        ctx.strokeStyle = 'yellow';
+        ctx.beginPath();
+
+        ctx.moveTo(prevx2, prevy2)
+        if (this.x > 800) {
+
+            if (this.x < c.width) {
+                prevx3 = this.x;
+                prevy3 = this.y;
+            }
+            ctx.lineTo(prevx3, prevy3);
+            console.log(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI);
+            document.getElementById("demo2").innerHTML = Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI;
+
+
+            ctx.stroke();
+
+            ctx.closePath();
         }
 
         round = round + 1;
-        ctx.stroke();
 
-        ctx.closePath();
     }
 
     resolveEdgeCollision() {
@@ -149,54 +189,62 @@ class Shape {
 
     }
     resolveRoundEdgeCollision() {
-        w = 500;
+        w = 400;
         h = 400;
-        k = 350;
+        k = 450;
         j = h + k;
         b = 540;
-        r = 300;
+        r = 350;
         m = -0.5;
-        ione = -Math.sqrt(-((j^2-h^2)/(2*j-2*h)-h)^2+r^2)+w;
-        itwo = -Math.sqrt(-((j^2-h^2)/(2*j-2*h)-h)^2+r^2)+w;
-       
+        xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
+        ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
+        itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
+
+        // console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
+        //console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
+        //console.log(4**2);
+        ctx.strokeStyle = 'white';
         ctx.beginPath();
-        ctx.arc(h, w, r, Math.PI, 1/2*Math.PI);
+        ctx.arc(h, w, r, 1.475 * Math.PI + calcAngle(xpos, itwo), 0.8 * Math.PI - calcAngle(xpos, ione), 0);
         //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
         ctx.stroke();
         ctx.closePath();
         ctx.beginPath();
-        ctx.arc(j, w, r, -(j ^ 2 - h ^ 2) / (2 * j - 2 * h), (j ^ 2 - h ^ 2) / (2 * j - 2 * h));
+        ctx.arc(j, w, r, 1.15 * Math.PI - calcAngle(xpos, ione), 1.12 * Math.PI + calcAngle(xpos, itwo), 0);
         ctx.stroke();
         ctx.closePath();
         // Detect collision with right wall.
         ctx.beginPath();
-        ctx.moveTo(-h * (j ^ 2 - h ^ 2) / (2 * j - 2 * h), 100);
-        ctx.lineTo(-h * (j ^ 2 - h ^ 2) / (2 * j - 2 * h), 600);
+        ctx.moveTo(xpos, ione);
+        ctx.lineTo(xpos, itwo);
         ctx.stroke();
         ctx.closePath();
-        if (this.x + this.r > c.width - 750) {
-            // Need to know how much we overshot the canvas width so we know how far to 'bounce'.
-            this.x = c.width - 750 - this.r;
+
+
+        // Detect collision with left wall.
+        if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+            this.x = this.x + this.r;
+            this.vx = -this.vx;
+            this.ax = -this.ax;
+        }
+        // Detect collision with right wall.
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) > r) {
+            this.x = this.x - this.r;
             this.vx = -this.vx;
             this.ax = -this.ax;
         }
 
         // Detect collision with bottom wall.
-        else if (this.y + this.r > c.height - 200) {
-            this.y = c.height - 200 - this.r;
+        else if (this.y - this.r < ione) {
+            this.y = this.y - this.r + 40;
             this.vy = -this.vy;
             this.ay = -this.ay;
         }
 
-        // Detect collision with left wall.
-        else if (this.x - this.r < 500) {
-            this.x = this.r + 500;
-            this.vx = -this.vx;
-            this.ax = -this.ax;
-        }
+
         // Detect collision with top wall.
-        else if (this.y - this.r < 300) {
-            this.y = this.r + 300;
+        else if (this.y - this.r > itwo) {
+            this.y = this.r + this.y - 40;
             this.vy = -this.vy;
             this.ay = -this.ay;
         }
@@ -346,11 +394,11 @@ function createPushingExample() {
     objects = [];
     light = [];
     medium1 = [];
-    let rows = 40;
-    let radius = 10;
+    let rows = 20;
+    let radius = 7.5;
     let startX = Math.round(c.offsetWidth / 3);
     let startY = Math.round(c.offsetHeight / 3);
-    let cols = Math.round(c.offsetHeight * 0.2) / radius; // 10% filled with balls (by height)
+    let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 0.2))
@@ -363,7 +411,7 @@ function createPushingExample() {
     let startYs = Math.round(c.offsetHeight / 3);
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 10, 10, 0.2))
+            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 0.2))
         }
     }
 }
