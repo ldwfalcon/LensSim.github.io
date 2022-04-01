@@ -14,15 +14,15 @@ xg = 0;
 yg = 0;
 t = [];
 l = [];
-w = 0;
-h = 5;
-k = 5.6;
-j = 0;
-b = 5.4;
-r = 5.8;
-m = -0.5;
-ione = 0;
-itwo = 0;
+w = 400;
+h = 400;
+k = 450;
+j = h + k;
+b = 540;
+r = 350;
+xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
+ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
+itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
 a = 0;
 top = 0;
 bottom = 0;
@@ -105,41 +105,42 @@ class Shape {
              t = tempx.toLocaleString();
              ctx.lineTo(Math.abs(t), Math.abs(i))
          }**/
-        if (this.x > 440) {
-            if (this.x < 480) {
+        if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+            if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
                 prevx = this.x;
                 prevy = this.y;
             }
-            ctx.lineTo(Math.abs(prevx), Math.abs(prevy))
-
-            ctx.stroke();
+          
 
         }
+        ctx.lineTo(Math.abs(prevx), Math.abs(prevy))
+
+        ctx.stroke();
         ctx.strokeStyle = 'red';
         ctx.beginPath();
 
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
-        if (this.x > 420) {
-
-            if (this.x < 780) {
-                prevx2 = this.x;
-                prevy2 = this.y;
-      
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x<h){
+                    prevx2 = this.x;
+                    prevy2 = this.y;
+                }
             }
-            ctx.lineTo(prevx2, prevy2);
             console.log(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI);
             document.getElementById("demo").innerHTML = Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI;
 
-            ctx.stroke();
-
-            ctx.closePath();
+       
         }
+        ctx.lineTo(prevx2, prevy2);
+        ctx.stroke();
+
+        ctx.closePath();
         ctx.strokeStyle = 'yellow';
         ctx.beginPath();
 
         ctx.moveTo(prevx2, prevy2)
         if (this.x > 800) {
-
             if (this.x < c.width) {
                 prevx3 = this.x;
                 prevy3 = this.y;
@@ -154,7 +155,7 @@ class Shape {
             ctx.closePath();
         }
 
-        round = round + 1;
+        
 
     }
 
@@ -189,16 +190,7 @@ class Shape {
 
     }
     resolveRoundEdgeCollision() {
-        w = 400;
-        h = 400;
-        k = 450;
-        j = h + k;
-        b = 540;
-        r = 350;
-        m = -0.5;
-        xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
-        ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
-        itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
+
 
         // console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
         //console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
