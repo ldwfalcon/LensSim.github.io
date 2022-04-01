@@ -107,8 +107,10 @@ class Shape {
          }**/
         if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                prevx = this.x;
-                prevy = this.y;
+                if (this.x<h+r){
+                    prevx = this.x;
+                    prevy = this.y;
+                }
             }
           
 
@@ -122,7 +124,7 @@ class Shape {
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x<h){
+                if (this.x<j){
                     prevx2 = this.x;
                     prevy2 = this.y;
                 }
