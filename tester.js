@@ -4,12 +4,24 @@ prevx2 = 0;
 prevy2 = 0;
 prevx3 = 0;
 prevy3 = 0;
+prevxx = 0;
+prevyy = 0;
+prevx22 = 0;
+prevy22 = 0;
+prevx33 = 0;
+prevy33 = 0;
 prevX = [];
 prevY = [];
+prevXX = [];
+prevYY = [];
 lightSlope = 0;
 lightSlope2 = 0;
+lightSlopee = 0;
+lightSlope22 = 0;
 tempx = [];
 tempy = [];
+tempxx = [];
+tempyy = [];
 round = 0;
 xg = 0;
 yg = 0;
@@ -28,10 +40,18 @@ x1 = 0;
 x2 = 0;
 y1 = 0;
 y2 = 0;
+
+x11 = 0;
+x22 = 0;
+y11 = 0;
+y22 = 0;
+
 a = 0;
 top = 0;
 bottom = 0;
 lightYstart2 = 0;
+lightYstart22 = 0;
+
 document.getElementById("demo").innerHTML = 0;
 document.getElementById("demo2").innerHTML = 0;
 
@@ -202,6 +222,131 @@ class Shape {
             }
             ctx.lineTo(prevx3, prevy3);
             document.getElementById("demo2").innerHTML = Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI;
+            ctx.stroke();
+            ctx.closePath();
+        }
+        if (this.x>c.width-50){
+            this.vx=0;
+            this.vy=0;
+            this.ax=0;
+            this.ay=0;
+        }
+
+        
+
+    }
+    drawPath2() {
+        let rows = 20;
+        let radius = 7.5;
+        let startX = Math.round(c.offsetWidth / 3);
+        let startY = Math.round(c.offsetHeight / 3);
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, startY + radius * rows / 2);
+
+        prevX.push(this.x);
+        prevY.push(this.y);
+
+        tempxx.concat(prevXX);
+        tempyy.concat(prevYY);
+
+        /**for (let i = 0; i < round; i++) { 
+            xg=tempx.pop();
+            yg=tempy.pop();
+            ctx.lineTo(Math.abs(xg), Math.abs(yg));
+        }**/
+        /** for(let i of prevY){
+             t = tempx.toLocaleString();
+             ctx.lineTo(Math.abs(t), Math.abs(i))
+         }**/
+        if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+            if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+                if (this.x<h+r){
+                    prevxx = this.x;
+                    prevyy = this.y;
+                }
+            }
+          
+
+        }
+        ctx.lineTo(Math.abs(prevxx), Math.abs(prevyy))
+
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'cyan';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([5, 15]);
+
+
+        if (this.x>h){
+            if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+                if (this.x<h+r){
+                    lightSlopee = (this.y-(lightYstart))/(this.x-20);
+                    x11 = (-(-2*j+2*lightSlopee*lightYstart)-Math.sqrt((-2*j+2*lightSlopee*lightYstart-2*lightSlope*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlopee**2));
+                    y11 = lightSlopee*(-(-2*j+2*lightSlopee*lightYstart)-Math.sqrt((-2*j+2*lightSlopee*lightYstart-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlopee**2))+lightYstart;
+                }
+            }
+            ctx.moveTo(prevxx-(-2*(x11-j))/(2*Math.PI), prevyy-(2*(y11-w))/(2*Math.PI));
+            ctx.lineTo(prevxx+(-2*(x11-j))/(2*Math.PI), prevyy+(2*(y11-w))/(2*Math.PI));
+        }
+
+        ctx.stroke();
+        
+        ctx.setLineDash([]);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'red';
+        ctx.beginPath();
+        ctx.moveTo(Math.abs(prevxx), Math.abs(prevyy))
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x<j){
+                    prevx22 = this.x;
+                    prevy22 = this.y;
+                }
+            }
+            document.getElementById("demoo").innerHTML = Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI;
+
+       
+        }
+        ctx.lineTo(prevx22, prevy22);
+        ctx.stroke();
+
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'cyan';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([5, 15]);
+
+
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x<j){
+                    lightSlope22 = (this.y-(prevyy))/(this.x-prevxx);
+                    lightYstart22 = prevyy;
+                    x22 = (-(-2*j+2*lightSlope22*lightYstart22)-Math.sqrt((-2*j+2*lightSlope22*lightYstart22-2*lightSlope22*w)**2-4*(1+lightSlope22**2)*(j**2+lightYstart22**2+w**2-2*lightYstart22*w-r**2)))/(2*(1+lightSlope22**2));
+                    y22 = lightSlope22*(-(-2*j+2*lightSlope22*lightYstart22)-Math.sqrt((-2*j+2*lightSlope22*lightYstart22-2*lightSlope22*w)**2-4*(1+lightSlope22**2)*(j**2+lightYstart22**2+w**2-2*lightYstart22*w-r**2)))/(2*(1+lightSlope22**2))+lightYstart22;
+                }
+            }
+        
+        ctx.moveTo(prevx22-(-2*(x22-j))/(2*Math.PI), prevy22-(2*(y2-w))/(2*Math.PI));
+        ctx.lineTo(prevx22+(-2*(x22-j))/(2*Math.PI), prevy22+(2*(y2-w))/(2*Math.PI));
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(prevx22, prevy22)
+        if (this.x > 800) {
+            if (this.x < c.width) {
+                prevx33 = this.x;
+                prevy33 = this.y;
+            }
+            ctx.lineTo(prevx33, prevy33);
+            document.getElementById("demo22").innerHTML = Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI;
             ctx.stroke();
             ctx.closePath();
         }
@@ -432,6 +577,7 @@ const ctx = c.getContext("2d");
 
 let objects = [];
 let light = [];
+let light2 = [];
 let lightHist = [];
 let medium1 = [];
 
@@ -443,6 +589,7 @@ function createPushingExample() {
     objects = [];
     light = [];
     medium1 = [];
+    light2 = [];
 
     let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
@@ -453,7 +600,7 @@ function createPushingExample() {
     }
 
     light.push(new Shape(20, startY + radius * rows / 2, 5, 100, 2, 100))
-    light.push(new Shape(20, startY + radius * rows / 2, 5, 100, -5, 100))
+    light2.push(new Shape(20, startY + radius * rows / 2, 5, 100, -5, 100))
 
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 3);
@@ -519,6 +666,9 @@ function animate() {
     for (let o of light) {
         o.move(0.1);
     }
+    for (let o of light2) {
+        o.move(0.1);
+    }
     ctx.globalAlpha = 0.4;
 
     for (let o of objects) {
@@ -539,6 +689,7 @@ function animate() {
     let allobs = [];
     allobs = objects.concat(light);
     allobs = allobs.concat(medium1);
+    allobs = allobs.concat(light2);
     for (let [i, o1] of allobs.entries()) {
         for (let [j, o2] of allobs.entries()) {
             if (i < j) {
@@ -576,6 +727,14 @@ function animate() {
     }
     for (let o of light) {
         o.drawPath();
+    }
+    for (let o of light2) {
+        ctx.fillStyle = "#FFDA00";
+        o.draw();
+        ctx.fill();
+    }
+    for (let o of light2) {
+        o.drawPath2();
     }
 
 
