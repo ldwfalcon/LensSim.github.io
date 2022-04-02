@@ -61,7 +61,7 @@ startX = Math.round(c.offsetWidth / 3);
 startY = Math.round(c.offsetHeight / 3);
 startYY = Math.round(c.offsetHeight / 2);
 lightYstart = startY ;
-lightYstartt = w;
+lightYstartt = startYY;
 t2 = [];
 }
 function calcAngle(opposite, adjacent) {
@@ -112,10 +112,6 @@ class Shape {
 
     }
     drawPath() {
-        let rows = 20;
-        let radius = 7.5;
-        let startX = Math.round(c.offsetWidth / 3);
-        let startY = Math.round(c.offsetHeight / 3);
         ctx.strokeStyle = 'yellow';
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -237,10 +233,6 @@ class Shape {
 
     }
     drawPath2() {
-        let rows = 20;
-        let radius = 7.5;
-        let startX = Math.round(c.offsetWidth / 3);
-        let startY = Math.round(c.offsetHeight / 3);
         ctx.strokeStyle = 'yellow';
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -285,7 +277,7 @@ class Shape {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
                 if (this.x<h+r){
                     lightSlopee = (this.y-(lightYstartt))/(this.x-20);
-                    x11 = (-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlope*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2));
+                    x11 = (-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2));
                     y11 = lightSlopee*(-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2))+lightYstartt;
                 }
             }
