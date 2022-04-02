@@ -40,7 +40,6 @@ x1 = 0;
 x2 = 0;
 y1 = 0;
 y2 = 0;
-
 x11 = 0;
 x22 = 0;
 y11 = 0;
@@ -56,11 +55,13 @@ document.getElementById("demo").innerHTML = 0;
 document.getElementById("demo2").innerHTML = 0;
 
 function vars(){
-rows = 20;
+rows = 50;
 radius = 7.5;
 startX = Math.round(c.offsetWidth / 3);
 startY = Math.round(c.offsetHeight / 3);
-lightYstart = startY + radius * rows / 2;
+startYY = Math.round(c.offsetHeight / 2);
+lightYstart = startY ;
+lightYstartt = w;
 t2 = [];
 }
 function calcAngle(opposite, adjacent) {
@@ -118,7 +119,7 @@ class Shape {
         ctx.strokeStyle = 'yellow';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(40, startY + radius * rows / 2);
+        ctx.moveTo(20, lightYstart);
 
         prevX.push(this.x);
         prevY.push(this.y);
@@ -243,7 +244,7 @@ class Shape {
         ctx.strokeStyle = 'yellow';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(40, startY + radius * rows / 2);
+        ctx.moveTo(20, lightYstartt);
 
         prevX.push(this.x);
         prevY.push(this.y);
@@ -283,9 +284,9 @@ class Shape {
         if (this.x>h){
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
                 if (this.x<h+r){
-                    lightSlopee = (this.y-(lightYstart))/(this.x-20);
-                    x11 = (-(-2*j+2*lightSlopee*lightYstart)-Math.sqrt((-2*j+2*lightSlopee*lightYstart-2*lightSlope*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlopee**2));
-                    y11 = lightSlopee*(-(-2*j+2*lightSlopee*lightYstart)-Math.sqrt((-2*j+2*lightSlopee*lightYstart-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlopee**2))+lightYstart;
+                    lightSlopee = (this.y-(lightYstartt))/(this.x-20);
+                    x11 = (-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlope*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2));
+                    y11 = lightSlopee*(-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2))+lightYstartt;
                 }
             }
             ctx.moveTo(prevxx-(-2*(x11-j))/(2*Math.PI), prevyy-(2*(y11-w))/(2*Math.PI));
@@ -356,9 +357,6 @@ class Shape {
             this.ax=0;
             this.ay=0;
         }
-
-        
-
     }
 
     resolveEdgeCollision() {
@@ -475,8 +473,6 @@ function checkCollision(o1, o2) {
     }
 }
 
-
-
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -556,7 +552,6 @@ let gravity = false;
 
 let currentCollisionType = CollisionTypes.push;
 
-
 function switchCollisionType() {
     let label = document.getElementById("switchCollisionLabel");
     if (currentCollisionType === CollisionTypes.bounce) {
@@ -569,7 +564,6 @@ function switchCollisionType() {
     }
 }
 document.getElementById("switchCollision").onclick = switchCollisionType;
-
 
 const maxSpeed = 150;
 const c = document.getElementById("canvas");
@@ -594,20 +588,20 @@ function createPushingExample() {
     let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-            objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 0.2))
-            objects.alpha=0.2;
+            objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 200))
+            objects.alpha=0.1;
         }
     }
 
-    light.push(new Shape(20, startY + radius * rows / 2, 5, 100, 2, 100))
-    light2.push(new Shape(20, startY + radius * rows / 2, 5, 100, -5, 100))
+    light.push(new Shape(20, lightYstart, 5, 100, 0, 10))
+    light2.push(new Shape(20, lightYstartt, 5, 100, 0, 10))
 
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 3);
     let startYs = Math.round(c.offsetHeight / 3);
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 0.2))
+    for (let i = 0; i < rows; i+=2) {
+        for (let j = 0; j < cols; j+=2) {
+            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 200))
             medium1.alpha=0.2;
         }
     }
@@ -708,8 +702,6 @@ function animate() {
     ctx.globalAlpha = 0.4;
 
     for (let o of objects) {
-
-        ctx.fillStyle = "#B5D050";
         o.draw();
         ctx.fill();
     }
@@ -743,4 +735,3 @@ function animate() {
 }
 
 window.requestAnimationFrame(animate);
-
