@@ -156,12 +156,12 @@ class Shape {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
                 if (this.x<h+r){
                     lightSlope = (this.y-(lightYstart))/(this.x-20);
-                    x1 = (-(-2*j+2*lightSlope*lightYstart)-Math.sqrt((-2*j+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2));
-                    y1 = lightSlope*(-(-2*j+2*lightSlope*lightYstart)-Math.sqrt((-2*j+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2))+lightYstart;
+                    x1 = (-(-2*h+2*lightSlope*lightYstart)-Math.sqrt((-2*h+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(h**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2));
+                    y1 = lightSlope*(-(-2*h+2*lightSlope*lightYstart)-Math.sqrt((-2*h+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(h**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2))+lightYstart;
                 }
             }
-            ctx.moveTo(prevx-(-2*(x1-j))/(2*Math.PI), prevy-(2*(y1-w))/(2*Math.PI));
-            ctx.lineTo(prevx+(-2*(x1-j))/(2*Math.PI), prevy+(2*(y1-w))/(2*Math.PI));
+            ctx.moveTo(prevx-(-2*(x1-j))/(2*Math.PI), prevy+(2*(y1-w))/(2*Math.PI));
+            ctx.lineTo(prevx+(-2*(x1-j))/(2*Math.PI), prevy-(2*(y1-w))/(2*Math.PI));
         }
 
         ctx.stroke();
@@ -718,7 +718,7 @@ function animate() {
         ctx.fill();
     }
     for (let o of light2) {
-        o.drawPath2();
+       o.drawPath2();
     }
 
 
