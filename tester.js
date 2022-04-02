@@ -589,7 +589,6 @@ function createPushingExample() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 200))
-            objects.alpha=0.1;
         }
     }
 
@@ -602,7 +601,6 @@ function createPushingExample() {
     for (let i = 0; i < rows; i+=2) {
         for (let j = 0; j < cols; j+=2) {
             medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 200))
-            medium1.alpha=0.2;
         }
     }
 }
@@ -699,12 +697,14 @@ function animate() {
     for (let col of collisions) {
         currentCollisionType(col)  // resolveCollision(col)
     }
-    ctx.globalAlpha = 0.4;
+    ctx.globalAlpha = 0;
 
     for (let o of objects) {
         o.draw();
         ctx.fill();
     }
+    ctx.globalAlpha = 0.4;
+
     for (let o of medium1) {
         ctx.fillStyle = "#003166";
         o.draw();
