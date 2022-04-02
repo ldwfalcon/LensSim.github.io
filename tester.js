@@ -6,7 +6,8 @@ prevx3 = 0;
 prevy3 = 0;
 prevX = [];
 prevY = [];
-
+lightSlope = 0;
+lightSlope2 = 0;
 tempx = [];
 tempy = [];
 round = 0;
@@ -23,15 +24,25 @@ r = 350;
 xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
 ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
 itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
+x1 = 0;
+x2 = 0;
+y1 = 0;
+y2 = 0;
 a = 0;
 top = 0;
 bottom = 0;
-xpos = 0;
+lightYstart2 = 0;
 document.getElementById("demo").innerHTML = 0;
 document.getElementById("demo2").innerHTML = 0;
 
-
+function vars(){
+rows = 20;
+radius = 7.5;
+startX = Math.round(c.offsetWidth / 3);
+startY = Math.round(c.offsetHeight / 3);
+lightYstart = startY + radius * rows / 2;
 t2 = [];
+}
 function calcAngle(opposite, adjacent) {
     return Math.atan(opposite / adjacent);
 }
@@ -85,13 +96,12 @@ class Shape {
         let startX = Math.round(c.offsetWidth / 3);
         let startY = Math.round(c.offsetHeight / 3);
         ctx.strokeStyle = 'yellow';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(40, startY + radius * rows / 2);
 
-        prevX.push(this.x)
-        prevY.push(this.y)
-
+        prevX.push(this.x);
+        prevY.push(this.y);
 
         tempx.concat(prevX);
         tempy.concat(prevY);
@@ -118,9 +128,32 @@ class Shape {
         ctx.lineTo(Math.abs(prevx), Math.abs(prevy))
 
         ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = 'cyan';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([5, 15]);
+
+
+        if (this.x>h){
+            if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+                if (this.x<h+r){
+                    lightSlope = (this.y-(lightYstart))/(this.x-20);
+                    x1 = (-(-2*j+2*lightSlope*lightYstart)-Math.sqrt((-2*j+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2));
+                    y1 = lightSlope*(-(-2*j+2*lightSlope*lightYstart)-Math.sqrt((-2*j+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(j**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2))+lightYstart;
+                }
+            }
+            ctx.moveTo(prevx-(-2*(x1-j))/(2*Math.PI), prevy-(2*(y1-w))/(2*Math.PI));
+            ctx.lineTo(prevx+(-2*(x1-j))/(2*Math.PI), prevy+(2*(y1-w))/(2*Math.PI));
+        }
+
+        ctx.stroke();
+        
+        ctx.setLineDash([]);
+
+        ctx.lineWidth = 2;
         ctx.strokeStyle = 'red';
         ctx.beginPath();
-
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
@@ -129,7 +162,6 @@ class Shape {
                     prevy2 = this.y;
                 }
             }
-            console.log(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI);
             document.getElementById("demo").innerHTML = Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI;
 
        
@@ -138,9 +170,30 @@ class Shape {
         ctx.stroke();
 
         ctx.closePath();
-        ctx.strokeStyle = 'yellow';
-        ctx.beginPath();
 
+        ctx.beginPath();
+        ctx.strokeStyle = 'cyan';
+        ctx.lineWidth = 5;
+        ctx.setLineDash([5, 15]);
+
+
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x<j){
+                    lightSlope2 = (this.y-(prevy))/(this.x-prevx);
+                    lightYstart2 = prevy;
+                    x2 = (-(-2*j+2*lightSlope2*lightYstart2)-Math.sqrt((-2*j+2*lightSlope2*lightYstart2-2*lightSlope2*w)**2-4*(1+lightSlope2**2)*(j**2+lightYstart2**2+w**2-2*lightYstart2*w-r**2)))/(2*(1+lightSlope2**2));
+                    y2 = lightSlope2*(-(-2*j+2*lightSlope2*lightYstart2)-Math.sqrt((-2*j+2*lightSlope2*lightYstart2-2*lightSlope2*w)**2-4*(1+lightSlope2**2)*(j**2+lightYstart2**2+w**2-2*lightYstart2*w-r**2)))/(2*(1+lightSlope2**2))+lightYstart2;
+                }
+            }
+        
+        ctx.moveTo(prevx2-(-2*(x2-j))/(2*Math.PI), prevy2-(2*(y2-w))/(2*Math.PI));
+        ctx.lineTo(prevx2+(-2*(x2-j))/(2*Math.PI), prevy2+(2*(y2-w))/(2*Math.PI));
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
         ctx.moveTo(prevx2, prevy2)
         if (this.x > 800) {
             if (this.x < c.width) {
@@ -148,13 +201,15 @@ class Shape {
                 prevy3 = this.y;
             }
             ctx.lineTo(prevx3, prevy3);
-            console.log(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI);
             document.getElementById("demo2").innerHTML = Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI;
-
-
             ctx.stroke();
-
             ctx.closePath();
+        }
+        if (this.x>c.width-50){
+            this.vx=0;
+            this.vy=0;
+            this.ax=0;
+            this.ay=0;
         }
 
         
@@ -388,24 +443,25 @@ function createPushingExample() {
     objects = [];
     light = [];
     medium1 = [];
-    let rows = 20;
-    let radius = 7.5;
-    let startX = Math.round(c.offsetWidth / 3);
-    let startY = Math.round(c.offsetHeight / 3);
+
     let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 0.2))
+            objects.alpha=0.2;
         }
     }
 
     light.push(new Shape(20, startY + radius * rows / 2, 5, 100, 2, 100))
+    light.push(new Shape(20, startY + radius * rows / 2, 5, 100, -5, 100))
+
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 3);
     let startYs = Math.round(c.offsetHeight / 3);
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 0.2))
+            medium1.alpha=0.2;
         }
     }
 }
@@ -456,26 +512,28 @@ function removeTimer(event) {
 /** This function is ran with every animation frame and each time clears canvas, updates coordinates of all objects,
  * resolves collisions of objects and edges of canvas , resolves collisions between objects and finally draws all of them. */
 function animate() {
+    vars();
     ctx.clearRect(0, 0, c.width, c.height);
 
 
     for (let o of light) {
         o.move(0.1);
     }
+    ctx.globalAlpha = 0.4;
+
     for (let o of objects) {
         o.move(0.1);
     }
     for (let o of medium1) {
         o.move(0.1);
     }
-
-
     for (let o of objects) {
         o.resolveRoundEdgeCollision();
     }
     for (let o of medium1) {
         o.resolveRoundEdgeCollision();
     }
+    ctx.globalAlpha = 1;
 
     let collisions = [];
     let allobs = [];
@@ -496,7 +554,10 @@ function animate() {
     for (let col of collisions) {
         currentCollisionType(col)  // resolveCollision(col)
     }
+    ctx.globalAlpha = 0.4;
+
     for (let o of objects) {
+
         ctx.fillStyle = "#B5D050";
         o.draw();
         ctx.fill();
@@ -506,6 +567,8 @@ function animate() {
         o.draw();
         ctx.fill();
     }
+    ctx.globalAlpha = 1;
+
     for (let o of light) {
         ctx.fillStyle = "#FFDA00";
         o.draw();
