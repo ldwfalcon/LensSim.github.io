@@ -592,7 +592,7 @@ function createPushingExample() {
     let startYs = Math.round(c.offsetHeight / 3);
     for (let i = 0; i < rows; i+=2) {
         for (let j = 0; j < cols; j+=2) {
-            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0.1, 0.1, 200))
+            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0000000001, 200))
         }
     }
 }
