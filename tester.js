@@ -181,7 +181,7 @@ class Shape {
                     prevy2 = this.y;
                 }
             }
-            document.getElementById("demo").innerHTML = 'θ1 of 1: ' + (Math.round(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI*1000)/1000);
+            document.getElementById("demo").innerHTML = 'a1 of 1: ' + (Math.round(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI*1000)/1000);
 
 
         }
@@ -220,7 +220,7 @@ class Shape {
                 prevy3 = this.y;
             }
             ctx.lineTo(prevx3, prevy3);
-            document.getElementById("demo2").innerHTML = 'θ2 of 1: ' + Math.round(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI*1000)/1000 ;
+            document.getElementById("demo2").innerHTML = 'a2 of 1: ' + Math.round(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI*1000)/1000 ;
             ctx.stroke();
             ctx.closePath();
         }
@@ -302,7 +302,7 @@ class Shape {
                     prevy22 = this.y;
                 }
             }
-            document.getElementById("demoo").innerHTML = 'θ1 of 2: ' + Math.round(Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI*1000)/1000;
+            document.getElementById("demoo").innerHTML = 'a1 of 2: ' + Math.round(Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI*1000)/1000;
 
 
         }
@@ -326,8 +326,8 @@ class Shape {
             }
         }
 
-        ctx.moveTo(prevx22 - (-2 * (x22 - j)) / (2 * Math.PI), prevy22 + (2 * (y2 - w)) / (2 * Math.PI));
-        ctx.lineTo(prevx22 + (-2 * (x22 - j)) / (2 * Math.PI), prevy22 - (2 * (y2 - w)) / (2 * Math.PI));
+        ctx.moveTo(prevx22 - (-2 * (x22 - h)) / (2 * Math.PI), prevy22 + (2 * (y2 - w)) / (2 * Math.PI));
+        ctx.lineTo(prevx22 + (-2 * (x22 - h)) / (2 * Math.PI), prevy22 - (2 * (y2 - w)) / (2 * Math.PI));
         ctx.stroke();
         ctx.setLineDash([]);
 
@@ -341,7 +341,7 @@ class Shape {
                 prevy33 = this.y;
             }
             ctx.lineTo(prevx33, prevy33);
-            document.getElementById("demo22").innerHTML = 'θ2 of 2: ' + Math.round(Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI*1000)/1000;
+            document.getElementById("demo22").innerHTML = 'a2 of 2: ' + Math.round(Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI*1000)/1000;
             ctx.stroke();
             ctx.closePath();
         }
