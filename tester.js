@@ -181,7 +181,7 @@ class Shape {
                     prevy2 = this.y;
                 }
             }
-            document.getElementById("demo").innerHTML = Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI;
+            document.getElementById("demo").innerHTML = 'θ1 of 1: ' + (Math.round(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI*1000)/1000);
 
 
         }
@@ -220,7 +220,7 @@ class Shape {
                 prevy3 = this.y;
             }
             ctx.lineTo(prevx3, prevy3);
-            document.getElementById("demo2").innerHTML = Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI;
+            document.getElementById("demo2").innerHTML = 'θ2 of 1: ' + Math.round(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI*1000)/1000 ;
             ctx.stroke();
             ctx.closePath();
         }
@@ -302,7 +302,7 @@ class Shape {
                     prevy22 = this.y;
                 }
             }
-            document.getElementById("demoo").innerHTML = Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI;
+            document.getElementById("demoo").innerHTML = 'θ1 of 2: ' + Math.round(Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI*1000)/1000;
 
 
         }
@@ -341,7 +341,7 @@ class Shape {
                 prevy33 = this.y;
             }
             ctx.lineTo(prevx33, prevy33);
-            document.getElementById("demo22").innerHTML = Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI;
+            document.getElementById("demo22").innerHTML = 'θ2 of 2: ' + Math.round(Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI*1000)/1000;
             ctx.stroke();
             ctx.closePath();
         }
@@ -590,7 +590,7 @@ function createPushingExample() {
     light2.push(new Shape(20, lightYstartt, 5, 100, 0, 10))
 
     /** x, y, radius, ax, ay, m, vx, vy */
-    let startXs = Math.round(c.offsetWidth / 3);
+    let startXs = Math.round(c.offsetWidth / 2.85);
     let startYs = Math.round(c.offsetHeight / 3);
     for (let i = 0; i < rows; i += 2) {
         for (let j = 0; j < cols; j += 2) {
