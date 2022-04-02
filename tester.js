@@ -41,7 +41,7 @@ bottom = 0;
 lightYstart2 = 0;
 lightYstart22 = 0;
 function vars() {
-    rows = 25;
+    rows = 100;
     radius = 7.5;
     h = Math.round(c.offsetWidth/3);
     k = 450;
