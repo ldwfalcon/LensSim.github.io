@@ -1,68 +1,70 @@
-prevx = 0;
-prevy = 0;
-prevx2 = 0;
-prevy2 = 0;
-prevx3 = 0;
-prevy3 = 0;
-prevxx = 0;
-prevyy = 0;
-prevx22 = 0;
-prevy22 = 0;
-prevx33 = 0;
-prevy33 = 0;
-prevX = [];
-prevY = [];
-prevXX = [];
-prevYY = [];
-lightSlope = 0;
-lightSlope2 = 0;
-lightSlopee = 0;
-lightSlope22 = 0;
-tempx = [];
-tempy = [];
-tempxx = [];
-tempyy = [];
-round = 0;
-xg = 0;
-yg = 0;
-t = [];
-l = [];
-w = 400;
-h = 400;
-k = 450;
-j = h + k;
-b = 540;
-r = 350;
-xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
-ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
-itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
-x1 = 0;
-x2 = 0;
-y1 = 0;
-y2 = 0;
-x11 = 0;
-x22 = 0;
-y11 = 0;
-y22 = 0;
-
-a = 0;
-top = 0;
-bottom = 0;
-lightYstart2 = 0;
-lightYstart22 = 0;
-
 document.getElementById("demo").innerHTML = 0;
 document.getElementById("demo2").innerHTML = 0;
+function varsMain() {
+    prevx = 0;
+    prevy = 0;
+    prevx2 = 0;
+    prevy2 = 0;
+    prevx3 = 0;
+    prevy3 = 0;
+    prevxx = 0;
+    prevyy = 0;
+    prevx22 = 0;
+    prevy22 = 0;
+    prevx33 = 0;
+    prevy33 = 0;
+    prevX = [];
+    prevY = [];
+    prevXX = [];
+    prevYY = [];
+    lightSlope = 0;
+    lightSlope2 = 0;
+    lightSlopee = 0;
+    lightSlope22 = 0;
+    tempx = [];
+    tempy = [];
+    tempxx = [];
+    tempyy = [];
+    round = 0;
+    xg = 0;
+    yg = 0;
+    t = [];
+    l = [];
+    w = 400;
+    h = 400;
+    k = 450;
+    j = h + k;
+    b = 540;
+    r = 350;
+    xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
+    ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
+    itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
+    x1 = 0;
+    x2 = 0;
+    y1 = 0;
+    y2 = 0;
+    x11 = 0;
+    x22 = 0;
+    y11 = 0;
+    y22 = 0;
 
-function vars(){
-rows = 50;
-radius = 7.5;
-startX = Math.round(c.offsetWidth / 3);
-startY = Math.round(c.offsetHeight / 3);
-startYY = Math.round(c.offsetHeight / 2);
-lightYstart = startY ;
-lightYstartt = startYY;
-t2 = [];
+    a = 0;
+    top = 0;
+    bottom = 0;
+    lightYstart2 = 0;
+    lightYstart22 = 0;
+
+}
+varsMain();
+function vars() {
+    rows = 50;
+    radius = 7.5;
+    startX = Math.round(c.offsetWidth / 3);
+    startY = Math.round(c.offsetHeight / 3);
+    startYY = Math.round(c.offsetHeight / 2);
+    lightYstart = startY;
+    lightYstartt = startYY;
+    t2 = [];
 }
 function calcAngle(opposite, adjacent) {
     return Math.atan(opposite / adjacent);
@@ -134,12 +136,12 @@ class Shape {
          }**/
         if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x<h+r){
+                if (this.x < h + r) {
                     prevx = this.x;
                     prevy = this.y;
                 }
             }
-          
+
 
         }
         ctx.lineTo(Math.abs(prevx), Math.abs(prevy))
@@ -152,20 +154,20 @@ class Shape {
         ctx.setLineDash([5, 15]);
 
 
-        if (this.x>h){
+        if (this.x > h) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x<h+r){
-                    lightSlope = (this.y-(lightYstart))/(this.x-20);
-                    x1 = (-(-2*h+2*lightSlope*lightYstart)-Math.sqrt((-2*h+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(h**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2));
-                    y1 = lightSlope*(-(-2*h+2*lightSlope*lightYstart)-Math.sqrt((-2*h+2*lightSlope*lightYstart-2*lightSlope*w)**2-4*(1+lightSlope**2)*(h**2+lightYstart**2+w**2-2*lightYstart*w-r**2)))/(2*(1+lightSlope**2))+lightYstart;
+                if (this.x < h + r) {
+                    lightSlope = (this.y - (lightYstart)) / (this.x - 20);
+                    x1 = (-(-2 * h + 2 * lightSlope * lightYstart) - Math.sqrt((-2 * h + 2 * lightSlope * lightYstart - 2 * lightSlope * w) ** 2 - 4 * (1 + lightSlope ** 2) * (h ** 2 + lightYstart ** 2 + w ** 2 - 2 * lightYstart * w - r ** 2))) / (2 * (1 + lightSlope ** 2));
+                    y1 = lightSlope * (-(-2 * h + 2 * lightSlope * lightYstart) - Math.sqrt((-2 * h + 2 * lightSlope * lightYstart - 2 * lightSlope * w) ** 2 - 4 * (1 + lightSlope ** 2) * (h ** 2 + lightYstart ** 2 + w ** 2 - 2 * lightYstart * w - r ** 2))) / (2 * (1 + lightSlope ** 2)) + lightYstart;
                 }
             }
-            ctx.moveTo(prevx-(-2*(x1-j))/(2*Math.PI), prevy+(2*(y1-w))/(2*Math.PI));
-            ctx.lineTo(prevx+(-2*(x1-j))/(2*Math.PI), prevy-(2*(y1-w))/(2*Math.PI));
+            ctx.moveTo(prevx - (-2 * (x1 - j)) / (2 * Math.PI), prevy + (2 * (y1 - w)) / (2 * Math.PI));
+            ctx.lineTo(prevx + (-2 * (x1 - j)) / (2 * Math.PI), prevy - (2 * (y1 - w)) / (2 * Math.PI));
         }
 
         ctx.stroke();
-        
+
         ctx.setLineDash([]);
 
         ctx.lineWidth = 2;
@@ -174,14 +176,14 @@ class Shape {
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x<j){
+                if (this.x < j) {
                     prevx2 = this.x;
                     prevy2 = this.y;
                 }
             }
             document.getElementById("demo").innerHTML = Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI;
 
-       
+
         }
         ctx.lineTo(prevx2, prevy2);
         ctx.stroke();
@@ -194,17 +196,17 @@ class Shape {
         ctx.setLineDash([5, 15]);
 
 
-            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x<j){
-                    lightSlope2 = (this.y-(prevy))/(this.x-prevx);
-                    lightYstart2 = prevy;
-                    x2 = (-(-2*j+2*lightSlope2*lightYstart2)-Math.sqrt((-2*j+2*lightSlope2*lightYstart2-2*lightSlope2*w)**2-4*(1+lightSlope2**2)*(j**2+lightYstart2**2+w**2-2*lightYstart2*w-r**2)))/(2*(1+lightSlope2**2));
-                    y2 = lightSlope2*(-(-2*j+2*lightSlope2*lightYstart2)-Math.sqrt((-2*j+2*lightSlope2*lightYstart2-2*lightSlope2*w)**2-4*(1+lightSlope2**2)*(j**2+lightYstart2**2+w**2-2*lightYstart2*w-r**2)))/(2*(1+lightSlope2**2))+lightYstart2;
-                }
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+            if (this.x < j) {
+                lightSlope2 = (this.y - (prevy)) / (this.x - prevx);
+                lightYstart2 = prevy;
+                x2 = (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2));
+                y2 = lightSlope2 * (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2)) + lightYstart2;
             }
-        
-        ctx.moveTo(prevx2-(-2*(x2-j))/(2*Math.PI), prevy2-(2*(y2-w))/(2*Math.PI));
-        ctx.lineTo(prevx2+(-2*(x2-j))/(2*Math.PI), prevy2+(2*(y2-w))/(2*Math.PI));
+        }
+
+        ctx.moveTo(prevx2 - (-2 * (x2 - j)) / (2 * Math.PI), prevy2 - (2 * (y2 - w)) / (2 * Math.PI));
+        ctx.lineTo(prevx2 + (-2 * (x2 - j)) / (2 * Math.PI), prevy2 + (2 * (y2 - w)) / (2 * Math.PI));
         ctx.stroke();
         ctx.setLineDash([]);
 
@@ -222,14 +224,14 @@ class Shape {
             ctx.stroke();
             ctx.closePath();
         }
-        if (this.x>c.width-50){
-            this.vx=0;
-            this.vy=0;
-            this.ax=0;
-            this.ay=0;
+        if (this.x > c.width - 50) {
+            this.vx = 0;
+            this.vy = 0;
+            this.ax = 0;
+            this.ay = 0;
         }
 
-        
+
 
     }
     drawPath2() {
@@ -255,12 +257,12 @@ class Shape {
          }**/
         if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x<h+r){
+                if (this.x < h + r) {
                     prevxx = this.x;
                     prevyy = this.y;
                 }
             }
-          
+
 
         }
         ctx.lineTo(Math.abs(prevxx), Math.abs(prevyy))
@@ -273,20 +275,20 @@ class Shape {
         ctx.setLineDash([5, 15]);
 
 
-        if (this.x>h){
+        if (this.x > h) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x<h+r){
-                    lightSlopee = (this.y-(lightYstartt))/(this.x-20);
-                    x11 = (-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2));
-                    y11 = lightSlopee*(-(-2*j+2*lightSlopee*lightYstartt)-Math.sqrt((-2*j+2*lightSlopee*lightYstartt-2*lightSlopee*w)**2-4*(1+lightSlopee**2)*(j**2+lightYstartt**2+w**2-2*lightYstartt*w-r**2)))/(2*(1+lightSlopee**2))+lightYstartt;
+                if (this.x < h + r) {
+                    lightSlopee = (this.y - (lightYstartt)) / (this.x - 20);
+                    x11 = (-(-2 * j + 2 * lightSlopee * lightYstartt) - Math.sqrt((-2 * j + 2 * lightSlopee * lightYstartt - 2 * lightSlopee * w) ** 2 - 4 * (1 + lightSlopee ** 2) * (j ** 2 + lightYstartt ** 2 + w ** 2 - 2 * lightYstartt * w - r ** 2))) / (2 * (1 + lightSlopee ** 2));
+                    y11 = lightSlopee * (-(-2 * j + 2 * lightSlopee * lightYstartt) - Math.sqrt((-2 * j + 2 * lightSlopee * lightYstartt - 2 * lightSlopee * w) ** 2 - 4 * (1 + lightSlopee ** 2) * (j ** 2 + lightYstartt ** 2 + w ** 2 - 2 * lightYstartt * w - r ** 2))) / (2 * (1 + lightSlopee ** 2)) + lightYstartt;
                 }
             }
-            ctx.moveTo(prevxx-(-2*(x11-j))/(2*Math.PI), prevyy+(2*(y11-w))/(2*Math.PI));
-            ctx.lineTo(prevxx+(-2*(x11-j))/(2*Math.PI), prevyy-(2*(y11-w))/(2*Math.PI));
+            ctx.moveTo(prevxx - (-2 * (x11 - j)) / (2 * Math.PI), prevyy + (2 * (y11 - w)) / (2 * Math.PI));
+            ctx.lineTo(prevxx + (-2 * (x11 - j)) / (2 * Math.PI), prevyy - (2 * (y11 - w)) / (2 * Math.PI));
         }
 
         ctx.stroke();
-        
+
         ctx.setLineDash([]);
 
         ctx.lineWidth = 2;
@@ -295,14 +297,14 @@ class Shape {
         ctx.moveTo(Math.abs(prevxx), Math.abs(prevyy))
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x<j){
+                if (this.x < j) {
                     prevx22 = this.x;
                     prevy22 = this.y;
                 }
             }
             document.getElementById("demoo").innerHTML = Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI;
 
-       
+
         }
         ctx.lineTo(prevx22, prevy22);
         ctx.stroke();
@@ -315,17 +317,17 @@ class Shape {
         ctx.setLineDash([5, 15]);
 
 
-            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x<j){
-                    lightSlope22 = (this.y-(prevyy))/(this.x-prevxx);
-                    lightYstart22 = prevyy;
-                    x22 = (-(-2*h+2*lightSlope22*lightYstart22)-Math.sqrt((-2*h+2*lightSlope22*lightYstart22-2*lightSlope22*w)**2-4*(1+lightSlope22**2)*(h**2+lightYstart22**2+w**2-2*lightYstart22*w-r**2)))/(2*(1+lightSlope22**2));
-                    y22 = lightSlope22*(-(-2*h+2*lightSlope22*lightYstart22)-Math.sqrt((-2*h+2*lightSlope22*lightYstart22-2*lightSlope22*w)**2-4*(1+lightSlope22**2)*(h**2+lightYstart22**2+w**2-2*lightYstart22*w-r**2)))/(2*(1+lightSlope22**2))+lightYstart22;
-                }
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+            if (this.x < j) {
+                lightSlope22 = (this.y - (prevyy)) / (this.x - prevxx);
+                lightYstart22 = prevyy;
+                x22 = (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2));
+                y22 = lightSlope22 * (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2)) + lightYstart22;
             }
-        
-        ctx.moveTo(prevx22-(-2*(x22-j))/(2*Math.PI), prevy22+(2*(y2-w))/(2*Math.PI));
-        ctx.lineTo(prevx22+(-2*(x22-j))/(2*Math.PI), prevy22-(2*(y2-w))/(2*Math.PI));
+        }
+
+        ctx.moveTo(prevx22 - (-2 * (x22 - j)) / (2 * Math.PI), prevy22 + (2 * (y2 - w)) / (2 * Math.PI));
+        ctx.lineTo(prevx22 + (-2 * (x22 - j)) / (2 * Math.PI), prevy22 - (2 * (y2 - w)) / (2 * Math.PI));
         ctx.stroke();
         ctx.setLineDash([]);
 
@@ -343,11 +345,11 @@ class Shape {
             ctx.stroke();
             ctx.closePath();
         }
-        if (this.x>c.width-50){
-            this.vx=0;
-            this.vy=0;
-            this.ax=0;
-            this.ay=0;
+        if (this.x > c.width - 50) {
+            this.vx = 0;
+            this.vy = 0;
+            this.ax = 0;
+            this.ay = 0;
         }
     }
 
@@ -590,8 +592,8 @@ function createPushingExample() {
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 3);
     let startYs = Math.round(c.offsetHeight / 3);
-    for (let i = 0; i < rows; i+=2) {
-        for (let j = 0; j < cols; j+=2) {
+    for (let i = 0; i < rows; i += 2) {
+        for (let j = 0; j < cols; j += 2) {
             medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0000000001, 200))
         }
     }
@@ -718,11 +720,9 @@ function animate() {
         ctx.fill();
     }
     for (let o of light2) {
-       o.drawPath2();
+        o.drawPath2();
     }
     window.requestAnimationFrame(animate);
 
 }
 window.requestAnimationFrame(animate);
-
-
