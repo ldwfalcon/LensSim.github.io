@@ -1,64 +1,57 @@
-document.getElementById("demo").innerHTML = 0;
-document.getElementById("demo2").innerHTML = 0;
-function varsMain() {
-    prevx = 0;
-    prevy = 0;
-    prevx2 = 0;
-    prevy2 = 0;
-    prevx3 = 0;
-    prevy3 = 0;
-    prevxx = 0;
-    prevyy = 0;
-    prevx22 = 0;
-    prevy22 = 0;
-    prevx33 = 0;
-    prevy33 = 0;
-    prevX = [];
-    prevY = [];
-    prevXX = [];
-    prevYY = [];
-    lightSlope = 0;
-    lightSlope2 = 0;
-    lightSlopee = 0;
-    lightSlope22 = 0;
-    tempx = [];
-    tempy = [];
-    tempxx = [];
-    tempyy = [];
-    round = 0;
-    xg = 0;
-    yg = 0;
-    t = [];
-    l = [];
-    w = 400;
-    h = 400;
+prevx = 0;
+prevy = 0;
+prevx2 = 0;
+prevy2 = 0;
+prevx3 = 0;
+prevy3 = 0;
+prevxx = 0;
+prevyy = 0;
+prevx22 = 0;
+prevy22 = 0;
+prevx33 = 0;
+prevy33 = 0;
+prevX = [];
+prevY = [];
+prevXX = [];
+prevYY = [];
+lightSlope = 0;
+lightSlope2 = 0;
+lightSlopee = 0;
+lightSlope22 = 0;
+tempx = [];
+tempy = [];
+tempxx = [];
+tempyy = [];
+round = 0;
+xg = 0;
+yg = 0;
+t = [];
+l = [];
+x1 = 0;
+x2 = 0;
+y1 = 0;
+y2 = 0;
+x11 = 0;
+x22 = 0;
+y11 = 0;
+y22 = 0;
+a = 0;
+top = 0;
+bottom = 0;
+lightYstart2 = 0;
+lightYstart22 = 0;
+function vars() {
+    rows = 250;
+    radius = 7.5;
+    h = Math.round(c.offsetWidth/3);
     k = 450;
     j = h + k;
     b = 540;
     r = 350;
     xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
+    w = Math.round(c.offsetHeight/2);
     ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
     itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
-    x1 = 0;
-    x2 = 0;
-    y1 = 0;
-    y2 = 0;
-    x11 = 0;
-    x22 = 0;
-    y11 = 0;
-    y22 = 0;
-
-    a = 0;
-    top = 0;
-    bottom = 0;
-    lightYstart2 = 0;
-    lightYstart22 = 0;
-
-}
-varsMain();
-function vars() {
-    rows = 50;
-    radius = 7.5;
     startX = Math.round(c.offsetWidth / 3);
     startY = Math.round(c.offsetHeight / 3);
     startYY = Math.round(c.offsetHeight / 2);
@@ -384,11 +377,6 @@ class Shape {
 
     }
     resolveRoundEdgeCollision() {
-
-
-        // console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
-        //console.log(calcAngle((j^2-h^2)/(2*j-2*h), 0));
-        //console.log(4**2);
         ctx.strokeStyle = 'white';
         ctx.beginPath();
         ctx.arc(h, w, r, 1.475 * Math.PI + calcAngle(xpos, itwo), 0.8 * Math.PI - calcAngle(xpos, ione), 0);
@@ -435,6 +423,38 @@ class Shape {
             this.ay = -this.ay;
         }
 
+    }
+    resolveMedium2Collision() {
+    
+        // Detect collision with left wall.
+        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+            this.x = this.x + 4*this.r;
+            this.vx = -this.vx;
+            this.ax = -this.ax;
+        }
+        // Detect collision with right wall.
+        if (this.x + this.r > c.width - 50) {
+            // Need to know how much we overshot the canvas width so we know how far to 'bounce'.
+            this.x = c.width - 4 * this.r;
+            this.vx = -this.vx;
+            this.ax = -this.ax;
+        }
+    
+        // Detect collision with bottom wall.
+        else if (this.y + this.r > c.height - 200) {
+            this.y = c.height - 200 - this.r;
+            this.vy = -this.vy;
+            this.ay = -this.ay;
+        }
+    
+    
+        // Detect collision with top wall.
+        else if (this.y - this.r < 300) {
+            this.y = this.r + 300;
+            this.vy = -this.vy;
+            this.ay = -this.ay;
+        }
+    
     }
 }
 
@@ -567,7 +587,8 @@ let objects = [];
 let light = [];
 let light2 = [];
 let lightHist = [];
-let medium1 = [];
+let lensMedium = [];
+let medium2 = [];
 
 function createPushingExample() {
     let labelCollision = document.getElementById("switchCollisionLabel");
@@ -576,8 +597,9 @@ function createPushingExample() {
 
     objects = [];
     light = [];
-    medium1 = [];
+    lensMedium = [];
     light2 = [];
+    medium2 = [];
 
     let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
@@ -586,15 +608,20 @@ function createPushingExample() {
         }
     }
 
-    light.push(new Shape(20, lightYstart, 5, 100, 0, 10))
-    light2.push(new Shape(20, lightYstartt, 5, 100, 0, 10))
+    light.push(new Shape(20, lightYstart, 1, 100, 0, 10))
+    light2.push(new Shape(20, lightYstartt, 1, 100, 0, 10))
 
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 2.85);
     let startYs = Math.round(c.offsetHeight / 3);
-    for (let i = 0; i < rows; i += 2) {
-        for (let j = 0; j < cols; j += 2) {
-            medium1.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0000000001, 200))
+    for (let i = 0; i < rows; i += 10) {
+        for (let j = 0; j < cols; j += 10) {
+            lensMedium.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0, 200))
+        }
+    }
+    for (let i = 0; i < rows; i ++) {
+        for (let j = 0; j < cols; j ++) {
+            medium2.push(new Shape(startXs + j * radius+k, startYs + i * radius, radius/4, 0, 0.0, 200))
         }
     }
 }
@@ -660,22 +687,29 @@ function animate() {
     for (let o of objects) {
         o.move(0.1);
     }
-    for (let o of medium1) {
+    for (let o of lensMedium) {
+        o.move(0.1);
+    }
+    for (let o of medium2) {
         o.move(0.1);
     }
     for (let o of objects) {
         o.resolveRoundEdgeCollision();
     }
-    for (let o of medium1) {
+    for (let o of lensMedium) {
         o.resolveRoundEdgeCollision();
+    }
+    for (let o of medium2) {
+        o.resolveMedium2Collision();
     }
     ctx.globalAlpha = 1;
 
     let collisions = [];
     let allobs = [];
     allobs = objects.concat(light);
-    allobs = allobs.concat(medium1);
+    allobs = allobs.concat(lensMedium);
     allobs = allobs.concat(light2);
+    allobs = allobs.concat(medium2)
     for (let [i, o1] of allobs.entries()) {
         for (let [j, o2] of allobs.entries()) {
             if (i < j) {
@@ -699,8 +733,13 @@ function animate() {
     }
     ctx.globalAlpha = 0.4;
 
-    for (let o of medium1) {
+    for (let o of lensMedium) {
         ctx.fillStyle = "#003166";
+        o.draw();
+        ctx.fill();
+    }
+    for (let o of medium2) {
+        ctx.fillStyle = "#FFDA00";
         o.draw();
         ctx.fill();
     }
