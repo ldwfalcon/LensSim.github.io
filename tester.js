@@ -41,8 +41,8 @@ bottom = 0;
 lightYstart2 = 0;
 lightYstart22 = 0;
 function vars() {
-    rows = 100;
-    radius = 7.5;
+    rows = 250;
+    radius = 5;
     h = Math.round(c.offsetWidth/3);
     k = 450;
     j = h + k;
@@ -601,10 +601,10 @@ function createPushingExample() {
     light2 = [];
     medium2 = [];
 
-    let cols = Math.round(c.offsetHeight * 0.3) / radius; // 10% filled with balls (by height)
+    let cols = (1/Math.PI)*h / radius; // 10% filled with balls (by height)
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-            objects.push(new Shape(startX + j * radius, startY + i * radius, radius, 0, 0, 200))
+            objects.push(new Shape(startX + 2*j * radius, 0.5*startY + i * radius, radius, 0, 0, 200))
         }
     }
 
@@ -725,9 +725,11 @@ function animate() {
     for (let col of collisions) {
         currentCollisionType(col)  // resolveCollision(col)
     }
-    ctx.globalAlpha = 0;
+    ctx.globalAlpha = 0.4;
 
     for (let o of objects) {
+        ctx.fillStyle = "#003166";
+
         o.draw();
         ctx.fill();
     }
