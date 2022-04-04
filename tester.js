@@ -48,38 +48,38 @@ function vars() {
     var sliderRange2 = document.getElementById("densitySliderRange");
     var output2 = document.getElementById("dens");
     output2.innerHTML = sliderRange2.value;
-    radius=Math.round(sliderRange2.value);
-    sliderRange2.oninput = function() {
-      output.innerHTML = this.value;
-    
+    radius = Math.round(sliderRange2.value);
+    sliderRange2.oninput = function () {
+        output.innerHTML = this.value;
+
     }
     rows = 50;
-    h = Math.round(c.offsetWidth/3);
+    h = Math.round(c.offsetWidth / 3);
     var sliderRange3 = document.getElementById("widthSliderRange");
     var output = document.getElementById("wid");
     output.innerHTML = (sliderRange3.value);
-    k=Math.round(sliderRange3.value);
-    
-    sliderRange3.oninput = function() {
-      output.innerHTML = this.value;
-    
+    k = Math.round(sliderRange3.value);
+
+    sliderRange3.oninput = function () {
+        output.innerHTML = this.value;
+
     }
     j = h + k;
     b = 540;
     var sliderRange = document.getElementById("radiusSliderRange");
     var output = document.getElementById("rad");
     output.innerHTML = sliderRange.value;
-    r=sliderRange.value;
-    
-    sliderRange.oninput = function() {
-      output.innerHTML = this.value;
-    
+    r = sliderRange.value;
+
+    sliderRange.oninput = function () {
+        output.innerHTML = this.value;
+
     }
     xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
-    w = Math.round(c.offsetHeight/2);
+    w = Math.round(c.offsetHeight / 2);
     ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
     itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
-    rowsHLength = Math.round(Math.abs(ione-itwo)/radius*2);
+    rowsHLength = Math.round(Math.abs(ione - itwo) / radius * 2);
     startX = Math.round(c.offsetWidth / 3);
     startY = Math.round(c.offsetHeight / 3);
     startYY = Math.round(c.offsetHeight / 2);
@@ -155,16 +155,15 @@ class Shape {
              t = tempx.toLocaleString();
              ctx.lineTo(Math.abs(t), Math.abs(i))
          }**/
-        if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+        if (this.x < j - r / 2) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x < h + r) {
-                    console.log(this.x);
-
-                    prevx = this.x;
-                    prevy = this.y;
+                if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+                    if (this.x < h + r) {
+                        prevx = this.x;
+                        prevy = this.y;
+                    }
                 }
             }
-
 
         }
         ctx.lineTo(Math.abs(prevx), Math.abs(prevy))
@@ -175,7 +174,6 @@ class Shape {
         ctx.strokeStyle = 'cyan';
         ctx.lineWidth = 5;
         ctx.setLineDash([5, 15]);
-
 
         if (this.x > h) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
@@ -198,16 +196,17 @@ class Shape {
         ctx.strokeStyle = 'red';
         ctx.beginPath();
         ctx.moveTo(Math.abs(prevx), Math.abs(prevy))
-        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+        if (this.x < j) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x < j) {
+                if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                    if (this.x < j) {
 
-                    prevx2 = this.x;
-                    prevy2 = this.y;
+                        prevx2 = this.x;
+                        prevy2 = this.y;
+                    }
                 }
+                document.getElementById("demo").innerHTML = 'θ1 of 1: ' + (Math.round(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI * 1000) / 1000);
             }
-            document.getElementById("demo").innerHTML = 'θ1 of 1: ' + (Math.round(Math.atan2(prevy2 - prevy, prevx2 - prevx) * 180 / Math.PI*1000)/1000);
-
 
         }
         ctx.lineTo(prevx2, prevy2);
@@ -220,13 +219,14 @@ class Shape {
         ctx.lineWidth = 5;
         ctx.setLineDash([5, 15]);
 
-
-        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-            if (this.x < j) {
-                lightSlope2 = (this.y - (prevy)) / (this.x - prevx);
-                lightYstart2 = prevy;
-                x2 = (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2));
-                y2 = lightSlope2 * (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2)) + lightYstart2;
+        if (this.x < j) {
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x < j) {
+                    lightSlope2 = (this.y - (prevy)) / (this.x - prevx);
+                    lightYstart2 = prevy;
+                    x2 = (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2));
+                    y2 = lightSlope2 * (-(-2 * j + 2 * lightSlope2 * lightYstart2) - Math.sqrt((-2 * j + 2 * lightSlope2 * lightYstart2 - 2 * lightSlope2 * w) ** 2 - 4 * (1 + lightSlope2 ** 2) * (j ** 2 + lightYstart2 ** 2 + w ** 2 - 2 * lightYstart2 * w - r ** 2))) / (2 * (1 + lightSlope2 ** 2)) + lightYstart2;
+                }
             }
         }
 
@@ -245,7 +245,7 @@ class Shape {
                 prevy3 = this.y;
             }
             ctx.lineTo(prevx3, prevy3);
-            document.getElementById("demo2").innerHTML = 'θ2 of 1: ' + Math.round(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI*1000)/1000 ;
+            document.getElementById("demo2").innerHTML = 'θ2 of 1: ' + Math.round(Math.atan2(prevy3 - prevy2, prevx3 - prevx2) * 180 / Math.PI * 1000) / 1000;
             ctx.stroke();
             ctx.closePath();
         }
@@ -280,15 +280,15 @@ class Shape {
              t = tempx.toLocaleString();
              ctx.lineTo(Math.abs(t), Math.abs(i))
          }**/
-        if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+        if (this.x < j - r / 2) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x < h + r) {
-                    prevxx = this.x;
-                    prevyy = this.y;
+                if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
+                    if (this.x < h + r) {
+                        prevxx = this.x;
+                        prevyy = this.y;
+                    }
                 }
             }
-
-
         }
         ctx.lineTo(Math.abs(prevxx), Math.abs(prevyy))
 
@@ -319,17 +319,17 @@ class Shape {
         ctx.lineWidth = 2;
         ctx.strokeStyle = 'red';
         ctx.beginPath();
-        ctx.moveTo(Math.abs(prevxx), Math.abs(prevyy))
-        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+        ctx.moveTo(Math.abs(prevxx), Math.abs(prevyy));
+        if (this.x < j) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-                if (this.x < j) {
-                    prevx22 = this.x;
-                    prevy22 = this.y;
+                if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                    if (this.x < j) {
+                        prevx22 = this.x;
+                        prevy22 = this.y;
+                    }
                 }
+                document.getElementById("demoo").innerHTML = 'θ1 of 2: ' + Math.round(Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI * 1000) / 1000;
             }
-            document.getElementById("demoo").innerHTML = 'θ1 of 2: ' + Math.round(Math.atan2(prevy22 - prevyy, prevx22 - prevxx) * 180 / Math.PI*1000)/1000;
-
-
         }
         ctx.lineTo(prevx22, prevy22);
         ctx.stroke();
@@ -341,16 +341,16 @@ class Shape {
         ctx.lineWidth = 5;
         ctx.setLineDash([5, 15]);
 
-
-        if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-            if (this.x < j) {
-                lightSlope22 = (this.y - (prevyy)) / (this.x - prevxx);
-                lightYstart22 = prevyy;
-                x22 = (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2));
-                y22 = lightSlope22 * (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2)) + lightYstart22;
+        if (this.x < j) {
+            if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
+                if (this.x < j) {
+                    lightSlope22 = (this.y - (prevyy)) / (this.x - prevxx);
+                    lightYstart22 = prevyy;
+                    x22 = (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2));
+                    y22 = lightSlope22 * (-(-2 * h + 2 * lightSlope22 * lightYstart22) - Math.sqrt((-2 * h + 2 * lightSlope22 * lightYstart22 - 2 * lightSlope22 * w) ** 2 - 4 * (1 + lightSlope22 ** 2) * (h ** 2 + lightYstart22 ** 2 + w ** 2 - 2 * lightYstart22 * w - r ** 2))) / (2 * (1 + lightSlope22 ** 2)) + lightYstart22;
+                }
             }
         }
-
         ctx.moveTo(prevx22 - (-2 * (x22 - h)) / (2 * Math.PI), prevy22 + (2 * (y2 - w)) / (2 * Math.PI));
         ctx.lineTo(prevx22 + (-2 * (x22 - h)) / (2 * Math.PI), prevy22 - (2 * (y2 - w)) / (2 * Math.PI));
         ctx.stroke();
@@ -366,7 +366,7 @@ class Shape {
                 prevy33 = this.y;
             }
             ctx.lineTo(prevx33, prevy33);
-            document.getElementById("demo22").innerHTML = 'θ2 of 2: ' + Math.round(Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI*1000)/1000;
+            document.getElementById("demo22").innerHTML = 'θ2 of 2: ' + Math.round(Math.atan2(prevy33 - prevy22, prevx33 - prevx22) * 180 / Math.PI * 1000) / 1000;
             ctx.stroke();
             ctx.closePath();
         }
@@ -412,14 +412,14 @@ class Shape {
         ctx.strokeStyle = 'white';
         ctx.beginPath();
         //ctx.arc(h, w, r, 1.46 * Math.PI + calcAngle(xpos, itwo), 0.725 * Math.PI - calcAngle(xpos, ione), 0);
-        ctx.arc(h, w, r, calcAngle(xpos-h, itwo-w), calcAngle(xpos-h, ione-w), 1);
+        ctx.arc(h, w, r, calcAngle(xpos - h, itwo - w), calcAngle(xpos - h, ione - w), 1);
         //opp/adj  
         //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
         ctx.stroke();
         ctx.closePath();
         ctx.beginPath();
         //ctx.arc(j, w, r, 1.165 * Math.PI - calcAngle(xpos, ione), 1.02 * Math.PI + calcAngle(xpos, itwo), 0);
-        ctx.arc(j, w, r, Math.PI-calcAngle(xpos-h, itwo-w), Math.PI-calcAngle(xpos-h, ione-w), 0);
+        ctx.arc(j, w, r, Math.PI - calcAngle(xpos - h, itwo - w), Math.PI - calcAngle(xpos - h, ione - w), 0);
         ctx.stroke();
         ctx.closePath();
         // Detect collision with right wall.
@@ -460,10 +460,10 @@ class Shape {
 
     }
     resolveMedium2Collision() {
-    
+
         // Detect collision with left wall.
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
-            this.x = this.x + 4*this.r;
+            this.x = this.x + 4 * this.r;
             this.vx = -this.vx;
             this.ax = -this.ax;
         }
@@ -474,22 +474,22 @@ class Shape {
             this.vx = -this.vx;
             this.ax = -this.ax;
         }
-    
+
         // Detect collision with bottom wall.
         else if (this.y + this.r > c.height - 200) {
             this.y = c.height - 200 - this.r;
             this.vy = -this.vy;
             this.ay = -this.ay;
         }
-    
-    
+
+
         // Detect collision with top wall.
         else if (this.y - this.r < 300) {
             this.y = this.r + 300;
             this.vy = -this.vy;
             this.ay = -this.ay;
         }
-    
+
     }
 }
 
@@ -636,15 +636,15 @@ function createPushingExample() {
     light2 = [];
     medium2 = [];
 
-    let cols = (1/Math.PI)*h / (radius*2); // 10% filled with balls (by height)
-    
+    let cols = (1 / Math.PI) * h / (radius * 2); // 10% filled with balls (by height)
+
     for (let i = 0; i < rowsHLength; i++) {
-        yrow=itwo-i*radius*2;
-        xrow = Math.abs(Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)-Math.abs((-(-2*h)+Math.sqrt((-2*h)**2-4*(h**2+yrow**2+w**2-2*yrow*w-r**2)))/2));
-        rowLength = Math.round(xrow/(radius*2));
+        yrow = itwo - i * radius * 2;
+        xrow = Math.abs(Math.abs((-(-2 * j) - Math.sqrt((-2 * j) ** 2 - 4 * (j ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2) - Math.abs((-(-2 * h) + Math.sqrt((-2 * h) ** 2 - 4 * (h ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2));
+        rowLength = Math.round(xrow / (radius * 2));
 
         for (let n = 0; n < rowLength; n++) {
-            objects.push(new Shape(Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+2*n*radius, itwo-radius*i*2, radius, 0, 0, 200))
+            objects.push(new Shape(Math.abs((-(-2 * j) - Math.sqrt((-2 * j) ** 2 - 4 * (j ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2) + 2 * n * radius, itwo - radius * i * 2, radius, 0, 0, 200))
         }
     }
 
@@ -657,7 +657,7 @@ function createPushingExample() {
 
     for (let i = 0; i < rows; i += 5) {
         for (let j = 0; j < 0; j += 5) {
-            medium2.push(new Shape(startXs + j * radius+k, startYs + i * radius, radius/4, 0, 0.0, 200))
+            medium2.push(new Shape(startXs + j * radius + k, startYs + i * radius, radius / 4, 0, 0.0, 200))
         }
     }
 }
@@ -722,8 +722,8 @@ function animate() {
         o.move(0.1);
     }
 
-   // for (let o of medium2) {
-     //   o.move(0.1);
+    // for (let o of medium2) {
+    //   o.move(0.1);
     //}
     for (let o of objects) {
         o.resolveRoundEdgeCollision();
@@ -731,8 +731,8 @@ function animate() {
     for (let o of lensMedium) {
         o.resolveRoundEdgeCollision();
     }
-   // for (let o of medium2) {
-     //   o.resolveMedium2Collision();
+    // for (let o of medium2) {
+    //   o.resolveMedium2Collision();
     //}
     ctx.globalAlpha = 1;
 
@@ -740,7 +740,7 @@ function animate() {
     let allobs = [];
     allobs = objects.concat(light);
     allobs = allobs.concat(light2);
-   // allobs = allobs.concat(medium2)
+    // allobs = allobs.concat(medium2)
     for (let [i, o1] of allobs.entries()) {
         for (let [j, o2] of allobs.entries()) {
             if (i < j) {
@@ -766,10 +766,10 @@ function animate() {
     }
     ctx.globalAlpha = 0.4;
 
-   // for (let o of medium2) {
-     //   ctx.fillStyle = "#FFDA00";
-       // o.draw();
-        //ctx.fill();
+    // for (let o of medium2) {
+    //   ctx.fillStyle = "#FFDA00";
+    // o.draw();
+    //ctx.fill();
     //}
     ctx.globalAlpha = 1;
 
@@ -790,7 +790,7 @@ function animate() {
         o.drawPath2();
     }
     window.requestAnimationFrame(animate);
-    
+
 
 }
 window.requestAnimationFrame(animate);
