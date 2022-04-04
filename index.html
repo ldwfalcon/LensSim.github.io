@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<head >
+<html lang="en">
+
+</html>
+
+<head>
 
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -13,52 +16,64 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 </head>
-
-
 <div id="container-left">
     <div class="pair">
-        <input class="button" id="switchCollision" type="button" value="Switch Collision Type"/>
+        <input class="button" id="switchCollision" type="button" value="Switch Collision Type" />
         <br>
         <label class="label" id="switchCollisionLabel" for="switchCollision">Push</label>
     </div>
+    <div class="slidecontainer">
+        <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
+        <p>Lens Radius: <span id="rad"></span></p>
+      </div>
+      <div class="slidecontainer">
+        <input type="range" min="5" max="15" value="10" class="slider" id="densitySliderRange">
+        <p>Density: <span id="dens"></span></p>
+      </div>
 </div>
+
+
 <div id="container-right">
-        <input class="button" id="pushExample" type="button" value="Start"/>
-       
-        <div style="text-align: center;"><b>Click and Hold to Create Circles (Hold Duration = Size </b></div>
-        <p id="demo"></p>
-        <p id="demo2"></p>
-        <p id="demoo"></p>
-        <p id="demo22"></p>
+    <input class="button" id="pushExample" type="button" value="Start" />
+    <input class="button" id="clear" type="button" value="clear" />
+
+    <div style="text-align: center;"><b>Click and Hold to Create Circles (Hold Duration = Size </b></div>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <p id="demoo"></p>
+    <p id="demo22"></p>
 
 </div>
 <canvas id="canvas">
 </canvas>
 
 <script>
-    (function() {
+    (function () {
         const canvas = document.getElementById('canvas'),
-        context = canvas.getContext('2d');
+            context = canvas.getContext('2d');
 
         // resize the canvas to fill browser window dynamically
         window.addEventListener('resize', resizeCanvas, false);
 
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth + 50;
+            canvas.height = window.innerHeight + 50;
         }
         resizeCanvas();
     })();
-    
+
 </script>
 <script type="text/javascript" src="tester.js"></script>
 <style>
-    * {  /* to remove the top and left whitespace */
+    * {
+        /* to remove the top and left whitespace */
         margin: 5;
         padding: 5;
     }
 
-    html, body { /* just to be sure these are full screen*/
+    html,
+    body {
+        /* just to be sure these are full screen*/
         width: 100%;
         height: 100%;
         background-color: rgb(0, 0, 0);
@@ -66,7 +81,8 @@
 
     }
 
-    canvas { /* To remove the scrollbars */
+    canvas {
+        /* To remove the scrollbars */
         height: 95%;
         width: 100vw;
         background-color: rgb(0, 0, 0);
@@ -74,12 +90,16 @@
     }
 
     #container-left {
+        padding: 25px;
         bottom: 0;
         left: 0;
         position: relative;
         height: 5%;
         float: left;
+        font-size: 20px;
+        font-family: open_dyslexic;
         background-color: rgb(0, 0, 0);
+        color: #ffffff;
     }
 
     #url {
@@ -91,35 +111,40 @@
     }
 
     #container-right {
+        padding: 25px;
         bottom: 0;
         left: 0;
         position: relative;
         height: 5%;
         float: right;
         background-color: rgb(0, 0, 0);
-        font-size: 16px;
-        font-family: Arial, serif;
+        font-size: 20px;
+        font-family: open_dyslexic;
+        color: #ffffff;
     }
 
     div.pair {
-        float:left;
+        float: left;
         text-align: center;
     }
 
     .button {
+        padding: 25px;
         background-color: rgb(0, 0, 0);
-        color: rgb(198, 255, 177);
-        border: 2px solid #ff9d00;
+        color: rgb(99, 145, 80);
+        border: 2px solid #ff5100;
         border-radius: 5px;
-        -webkit-transition-duration: 0.4s; /* Safari */
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
         transition-duration: 0.4s;
-
+        font-family: open_dyslexic;
         padding: 12px 28px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 22.5px;
         margin: 4px 2px;
+        color: #ffffff;
     }
 
     .button:hover {
@@ -131,10 +156,76 @@
     .label {
         font-size: 16px;
         pointer-events: none;
-        font-family: Arial, serif;
+        font-family: open_dyslexic;
         color: rgb(198, 255, 177);
 
     }
 
-</style>
+    .slidecontainer {
+        width: 100%;
+        /* Width of the outside container */
+    }
 
+    /* The slider itself */
+    .slider {
+        -webkit-appearance: none;
+        /* Override default CSS styles */
+        appearance: none;
+        width: 100%;
+        /* Full-width */
+        height: 25px;
+        /* Specified height */
+        background: #fff1e2;
+        /* Grey background */
+        outline: none;
+        /* Remove outline */
+        opacity: 0.8;
+        /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s;
+        /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+    }
+
+    /* Mouse-over effects */
+    .slider:hover {
+        opacity: 1;
+        /* Fully shown on mouse-over */
+    }
+
+    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        /* Override default look */
+        appearance: none;
+        width: 25px;
+        /* Set a specific slider handle width */
+        height: 25px;
+        /* Slider handle height */
+        background: #e64500;
+        /* Green background */
+        cursor: pointer;
+        /* Cursor on hover */
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        /* Set a specific slider handle width */
+        height: 25px;
+        /* Slider handle height */
+        background: #aa3904;
+        /* Green background */
+        cursor: pointer;
+        /* Cursor on hover */
+    }
+    @font-face {
+    font-family: open_dyslexic;
+    src: url("open_dyslexic/OpenDyslexic-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: open_dyslexic;
+    font-weight: bold;
+    src: url("open_dyslexic/OpenDyslexic-Bold.otf") format("opentype");
+}
+
+</style>
