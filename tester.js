@@ -79,7 +79,16 @@ function vars() {
     w = Math.round(c.offsetHeight / 2);
     ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
     itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
-    rowsHLength = Math.round(Math.abs(ione - itwo) / radius * 2);
+    var sliderRange4 = document.getElementById("overlapSliderRange");
+    var output = document.getElementById("ove");
+    output.innerHTML = (sliderRange4.value);
+    overlap = Math.round(sliderRange4.value);
+
+    sliderRange4.oninput = function () {
+        output.innerHTML = this.value;
+
+    }
+    rowsHLength = Math.round(Math.abs(ione - itwo) / (radius * overlap));
     startX = Math.round(c.offsetWidth / 3);
     startY = Math.round(c.offsetHeight / 3);
     startYY = Math.round(c.offsetHeight / 2);
@@ -636,15 +645,15 @@ function createPushingExample() {
     light2 = [];
     medium2 = [];
 
-    let cols = (1 / Math.PI) * h / (radius * 2); // 10% filled with balls (by height)
+    let cols = (1 / Math.PI) * h / (radius * overlap); // 10% filled with balls (by height)
 
     for (let i = 0; i < rowsHLength; i++) {
-        yrow = itwo - i * radius * 2;
+        yrow = itwo - i * radius * overlap;
         xrow = Math.abs(Math.abs((-(-2 * j) - Math.sqrt((-2 * j) ** 2 - 4 * (j ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2) - Math.abs((-(-2 * h) + Math.sqrt((-2 * h) ** 2 - 4 * (h ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2));
-        rowLength = Math.round(xrow / (radius * 2));
+        rowLength = Math.round(xrow / (radius * overlap));
 
         for (let n = 0; n < rowLength; n++) {
-            objects.push(new Shape(Math.abs((-(-2 * j) - Math.sqrt((-2 * j) ** 2 - 4 * (j ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2) + 2 * n * radius, itwo - radius * i * 2, radius, 0, 0, 200))
+            objects.push(new Shape(Math.abs((-(-2 * j) - Math.sqrt((-2 * j) ** 2 - 4 * (j ** 2 + yrow ** 2 + w ** 2 - 2 * yrow * w - r ** 2))) / 2) + overlap * n * radius, itwo - radius * i * overlap, radius, 0, 0, 200))
         }
     }
 
@@ -756,7 +765,7 @@ function animate() {
     for (let col of collisions) {
         currentCollisionType(col)  // resolveCollision(col)
     }
-    ctx.globalAlpha = 0.4;
+    ctx.globalAlpha = 0.5;
 
     for (let o of objects) {
         ctx.fillStyle = "#003166";
