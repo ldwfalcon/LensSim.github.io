@@ -55,7 +55,15 @@ function vars() {
     }
     rows = 50;
     h = Math.round(c.offsetWidth/3);
-    k = 450;
+    var sliderRange3 = document.getElementById("widthSliderRange");
+    var output = document.getElementById("wid");
+    output.innerHTML = (sliderRange3.value);
+    k=Math.round(sliderRange3.value);
+    
+    sliderRange3.oninput = function() {
+      output.innerHTML = this.value;
+    
+    }
     j = h + k;
     b = 540;
     var sliderRange = document.getElementById("radiusSliderRange");
@@ -71,7 +79,7 @@ function vars() {
     w = Math.round(c.offsetHeight/2);
     ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
     itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
-    rowsHLength = Math.round(Math.abs(ione-itwo)/radius);
+    rowsHLength = Math.round(Math.abs(ione-itwo)/radius*2);
     startX = Math.round(c.offsetWidth / 3);
     startY = Math.round(c.offsetHeight / 3);
     startYY = Math.round(c.offsetHeight / 2);
@@ -150,6 +158,8 @@ class Shape {
         if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
                 if (this.x < h + r) {
+                    console.log(this.x);
+
                     prevx = this.x;
                     prevy = this.y;
                 }
@@ -169,10 +179,11 @@ class Shape {
 
         if (this.x > h) {
             if (Math.sqrt((this.x - j) ** 2 + (this.y - w) ** 2) > r) {
-                if (this.x < h + r) {
+                if (this.x < j) {
                     lightSlope = (this.y - (lightYstart)) / (this.x - 20);
                     x1 = (-(-2 * h + 2 * lightSlope * lightYstart) - Math.sqrt((-2 * h + 2 * lightSlope * lightYstart - 2 * lightSlope * w) ** 2 - 4 * (1 + lightSlope ** 2) * (h ** 2 + lightYstart ** 2 + w ** 2 - 2 * lightYstart * w - r ** 2))) / (2 * (1 + lightSlope ** 2));
                     y1 = lightSlope * (-(-2 * h + 2 * lightSlope * lightYstart) - Math.sqrt((-2 * h + 2 * lightSlope * lightYstart - 2 * lightSlope * w) ** 2 - 4 * (1 + lightSlope ** 2) * (h ** 2 + lightYstart ** 2 + w ** 2 - 2 * lightYstart * w - r ** 2))) / (2 * (1 + lightSlope ** 2)) + lightYstart;
+
                 }
             }
             ctx.moveTo(prevx - (-2 * (x1 - j)) / (2 * Math.PI), prevy + (2 * (y1 - w)) / (2 * Math.PI));
@@ -190,6 +201,7 @@ class Shape {
         if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
             if (Math.sqrt((this.x - h) ** 2 + (this.y - w) ** 2) < r) {
                 if (this.x < j) {
+
                     prevx2 = this.x;
                     prevy2 = this.y;
                 }
@@ -399,12 +411,15 @@ class Shape {
     resolveRoundEdgeCollision() {
         ctx.strokeStyle = 'white';
         ctx.beginPath();
-        ctx.arc(h, w, r, 1.46 * Math.PI + calcAngle(xpos, itwo), 0.725 * Math.PI - calcAngle(xpos, ione), 0);
+        //ctx.arc(h, w, r, 1.46 * Math.PI + calcAngle(xpos, itwo), 0.725 * Math.PI - calcAngle(xpos, ione), 0);
+        ctx.arc(h, w, r, calcAngle(xpos-h, itwo-w), calcAngle(xpos-h, ione-w), 1);
+        //opp/adj  
         //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
         ctx.stroke();
         ctx.closePath();
         ctx.beginPath();
-        ctx.arc(j, w, r, 1.165 * Math.PI - calcAngle(xpos, ione), 1.02 * Math.PI + calcAngle(xpos, itwo), 0);
+        //ctx.arc(j, w, r, 1.165 * Math.PI - calcAngle(xpos, ione), 1.02 * Math.PI + calcAngle(xpos, itwo), 0);
+        ctx.arc(j, w, r, Math.PI-calcAngle(xpos-h, itwo-w), Math.PI-calcAngle(xpos-h, ione-w), 0);
         ctx.stroke();
         ctx.closePath();
         // Detect collision with right wall.
@@ -621,30 +636,25 @@ function createPushingExample() {
     light2 = [];
     medium2 = [];
 
-    let cols = (1/Math.PI)*h / radius; // 10% filled with balls (by height)
+    let cols = (1/Math.PI)*h / (radius*2); // 10% filled with balls (by height)
     
     for (let i = 0; i < rowsHLength; i++) {
-        yrow=itwo-i*radius;
+        yrow=itwo-i*radius*2;
         xrow = Math.abs(Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)-Math.abs((-(-2*h)+Math.sqrt((-2*h)**2-4*(h**2+yrow**2+w**2-2*yrow*w-r**2)))/2));
-        rowLength = Math.round(xrow/radius);
+        rowLength = Math.round(xrow/(radius*2));
 
-        for (let j = 0; j < rowLength; j++) {
-            objects.push(new Shape(2*Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+j*radius, itwo-radius*i, radius, 0, 0, 200))
-            console.log(2*Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+j*radius);
+        for (let n = 0; n < rowLength; n++) {
+            objects.push(new Shape(Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+2*n*radius, itwo-radius*i*2, radius, 0, 0, 200))
         }
     }
 
-    light.push(new Shape(20, lightYstart, 1, 100, 0, 10))
-    light2.push(new Shape(20, lightYstartt, 1, 100, 0, 10))
+    light.push(new Shape(20, lightYstart, 4, 100, 0, 10))
+    light2.push(new Shape(20, lightYstartt, 4, 100, 0, 10))
 
     /** x, y, radius, ax, ay, m, vx, vy */
     let startXs = Math.round(c.offsetWidth / 2.85);
     let startYs = Math.round(c.offsetHeight / 3);
-    for (let i = 0; i < rows; i += 10) {
-        for (let j = 0; j < cols; j += 10) {
-            lensMedium.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0, 200))
-        }
-    }
+
     for (let i = 0; i < rows; i += 5) {
         for (let j = 0; j < 0; j += 5) {
             medium2.push(new Shape(startXs + j * radius+k, startYs + i * radius, radius/4, 0, 0.0, 200))
@@ -686,7 +696,6 @@ function removeTimer(event) {
         // strip the ms
         timeDiff /= 1000;
         createShape(event, Math.round(10 * timeDiff), Math.ceil(100 * timeDiff));
-        console.log(objects[objects.length - 1]);
     }
     if (holdTimer) {
         window.clearTimeout(holdTimer);
@@ -712,9 +721,7 @@ function animate() {
     for (let o of objects) {
         o.move(0.1);
     }
-    for (let o of lensMedium) {
-        o.move(0.1);
-    }
+
    // for (let o of medium2) {
      //   o.move(0.1);
     //}
@@ -732,7 +739,6 @@ function animate() {
     let collisions = [];
     let allobs = [];
     allobs = objects.concat(light);
-    allobs = allobs.concat(lensMedium);
     allobs = allobs.concat(light2);
    // allobs = allobs.concat(medium2)
     for (let [i, o1] of allobs.entries()) {
@@ -760,11 +766,6 @@ function animate() {
     }
     ctx.globalAlpha = 0.4;
 
-    for (let o of lensMedium) {
-        ctx.fillStyle = "#003166";
-        o.draw();
-        ctx.fill();
-    }
    // for (let o of medium2) {
      //   ctx.fillStyle = "#FFDA00";
        // o.draw();
