@@ -40,18 +40,38 @@ top = 0;
 bottom = 0;
 lightYstart2 = 0;
 lightYstart22 = 0;
+xrow = 0;
+yrow = 0;
+rowLength = 0;
+
 function vars() {
-    rows = 250;
-    radius = 5;
+    var sliderRange2 = document.getElementById("densitySliderRange");
+    var output2 = document.getElementById("dens");
+    output2.innerHTML = sliderRange2.value;
+    radius=Math.round(sliderRange2.value);
+    sliderRange2.oninput = function() {
+      output.innerHTML = this.value;
+    
+    }
+    rows = 50;
     h = Math.round(c.offsetWidth/3);
     k = 450;
     j = h + k;
     b = 540;
-    r = 350;
+    var sliderRange = document.getElementById("radiusSliderRange");
+    var output = document.getElementById("rad");
+    output.innerHTML = sliderRange.value;
+    r=sliderRange.value;
+    
+    sliderRange.oninput = function() {
+      output.innerHTML = this.value;
+    
+    }
     xpos = (j ** 2 - h ** 2) / (2 * j - 2 * h);
     w = Math.round(c.offsetHeight/2);
     ione = -Math.sqrt(-1 * (xpos - h) ** 2 + r ** 2) + w;
     itwo = Math.sqrt(-1 * (xpos - j) ** 2 + r ** 2) + w;
+    rowsHLength = Math.round(Math.abs(ione-itwo)/radius);
     startX = Math.round(c.offsetWidth / 3);
     startY = Math.round(c.offsetHeight / 3);
     startYY = Math.round(c.offsetHeight / 2);
@@ -379,12 +399,12 @@ class Shape {
     resolveRoundEdgeCollision() {
         ctx.strokeStyle = 'white';
         ctx.beginPath();
-        ctx.arc(h, w, r, 1.475 * Math.PI + calcAngle(xpos, itwo), 0.8 * Math.PI - calcAngle(xpos, ione), 0);
+        ctx.arc(h, w, r, 1.46 * Math.PI + calcAngle(xpos, itwo), 0.725 * Math.PI - calcAngle(xpos, ione), 0);
         //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
         ctx.stroke();
         ctx.closePath();
         ctx.beginPath();
-        ctx.arc(j, w, r, 1.15 * Math.PI - calcAngle(xpos, ione), 1.12 * Math.PI + calcAngle(xpos, itwo), 0);
+        ctx.arc(j, w, r, 1.165 * Math.PI - calcAngle(xpos, ione), 1.02 * Math.PI + calcAngle(xpos, itwo), 0);
         ctx.stroke();
         ctx.closePath();
         // Detect collision with right wall.
@@ -602,9 +622,15 @@ function createPushingExample() {
     medium2 = [];
 
     let cols = (1/Math.PI)*h / radius; // 10% filled with balls (by height)
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            objects.push(new Shape(startX + 2*j * radius, 0.5*startY + i * radius, radius, 0, 0, 200))
+    
+    for (let i = 0; i < rowsHLength; i++) {
+        yrow=itwo-i*radius;
+        xrow = Math.abs(Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)-Math.abs((-(-2*h)+Math.sqrt((-2*h)**2-4*(h**2+yrow**2+w**2-2*yrow*w-r**2)))/2));
+        rowLength = Math.round(xrow/radius);
+
+        for (let j = 0; j < rowLength; j++) {
+            objects.push(new Shape(2*Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+j*radius, itwo-radius*i, radius, 0, 0, 200))
+            console.log(2*Math.abs((-(-2*j)-Math.sqrt((-2*j)**2-4*(j**2+yrow**2+w**2-2*yrow*w-r**2)))/2)+j*radius);
         }
     }
 
@@ -619,8 +645,8 @@ function createPushingExample() {
             lensMedium.push(new Shape(startXs + j * radius, startYs + i * radius, radius, 0, 0.0, 200))
         }
     }
-    for (let i = 0; i < rows; i ++) {
-        for (let j = 0; j < cols; j ++) {
+    for (let i = 0; i < rows; i += 5) {
+        for (let j = 0; j < 0; j += 5) {
             medium2.push(new Shape(startXs + j * radius+k, startYs + i * radius, radius/4, 0, 0.0, 200))
         }
     }
@@ -628,7 +654,6 @@ function createPushingExample() {
 
 
 document.getElementById("pushExample").onclick = createPushingExample;
-
 
 
 /** Used with click + hold events to create circles (objects). */
@@ -690,18 +715,18 @@ function animate() {
     for (let o of lensMedium) {
         o.move(0.1);
     }
-    for (let o of medium2) {
-        o.move(0.1);
-    }
+   // for (let o of medium2) {
+     //   o.move(0.1);
+    //}
     for (let o of objects) {
         o.resolveRoundEdgeCollision();
     }
     for (let o of lensMedium) {
         o.resolveRoundEdgeCollision();
     }
-    for (let o of medium2) {
-        o.resolveMedium2Collision();
-    }
+   // for (let o of medium2) {
+     //   o.resolveMedium2Collision();
+    //}
     ctx.globalAlpha = 1;
 
     let collisions = [];
@@ -709,7 +734,7 @@ function animate() {
     allobs = objects.concat(light);
     allobs = allobs.concat(lensMedium);
     allobs = allobs.concat(light2);
-    allobs = allobs.concat(medium2)
+   // allobs = allobs.concat(medium2)
     for (let [i, o1] of allobs.entries()) {
         for (let [j, o2] of allobs.entries()) {
             if (i < j) {
@@ -740,11 +765,11 @@ function animate() {
         o.draw();
         ctx.fill();
     }
-    for (let o of medium2) {
-        ctx.fillStyle = "#FFDA00";
-        o.draw();
-        ctx.fill();
-    }
+   // for (let o of medium2) {
+     //   ctx.fillStyle = "#FFDA00";
+       // o.draw();
+        //ctx.fill();
+    //}
     ctx.globalAlpha = 1;
 
     for (let o of light) {
@@ -764,6 +789,10 @@ function animate() {
         o.drawPath2();
     }
     window.requestAnimationFrame(animate);
+    
 
 }
 window.requestAnimationFrame(animate);
+
+
+
