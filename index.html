@@ -16,6 +16,7 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 </head>
+
 <div id="container-left">
     <div class="pair">
         <input class="button" id="switchCollision" type="button" value="Switch Collision Type" />
@@ -24,11 +25,15 @@
     </div>
     <div class="slidecontainer">
         <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
-        <p>Lens Radius: <span id="rad"></span></p>
+        <p style="margin: 0.1em;">Lens Radius: <span id="rad"></span></p>
       </div>
       <div class="slidecontainer">
         <input type="range" min="5" max="15" value="10" class="slider" id="densitySliderRange">
-        <p>Density: <span id="dens"></span></p>
+        <p style="margin: 0.1em;">Density: <span id="dens"></span></p>
+      </div>
+      <div class="slidecontainer">
+        <input style="direction: rtl;" type="range" min="250" max="650" value="450" class="slider" id="widthSliderRange">
+        <p style="margin: 0.1em;">Lens Width: <span id="wid"></span></p>
       </div>
 </div>
 
@@ -64,6 +69,8 @@
 
 </script>
 <script type="text/javascript" src="tester.js"></script>
+
+  
 <style>
     * {
         /* to remove the top and left whitespace */
@@ -96,7 +103,7 @@
         position: relative;
         height: 5%;
         float: left;
-        font-size: 20px;
+        font-size: 2vh;
         font-family: open_dyslexic;
         background-color: rgb(0, 0, 0);
         color: #ffffff;
@@ -107,7 +114,7 @@
         bottom: 15px;
         left: 15px;
         width: 100%;
-        font-size: 18px;
+        font-size: 2vh;
     }
 
     #container-right {
@@ -118,7 +125,7 @@
         height: 5%;
         float: right;
         background-color: rgb(0, 0, 0);
-        font-size: 20px;
+        font-size: 2vh;
         font-family: open_dyslexic;
         color: #ffffff;
     }
@@ -129,7 +136,7 @@
     }
 
     .button {
-        padding: 25px;
+        padding: 3vh;
         background-color: rgb(0, 0, 0);
         color: rgb(99, 145, 80);
         border: 2px solid #ff5100;
@@ -138,11 +145,14 @@
         /* Safari */
         transition-duration: 0.4s;
         font-family: open_dyslexic;
-        padding: 12px 28px;
+        padding-top: 0.75vh;
+        padding-bottom: 0.75vh;
+        padding-left: 0.75vw;
+        padding-right: 0.75vw;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 22.5px;
+        font-size: 2.5vh;
         margin: 4px 2px;
         color: #ffffff;
     }
@@ -154,7 +164,7 @@
     }
 
     .label {
-        font-size: 16px;
+        font-size: 2vh;
         pointer-events: none;
         font-family: open_dyslexic;
         color: rgb(198, 255, 177);
@@ -162,18 +172,19 @@
     }
 
     .slidecontainer {
-        width: 100%;
+        width: 20vw;
         /* Width of the outside container */
     }
 
     /* The slider itself */
     .slider {
+
         -webkit-appearance: none;
         /* Override default CSS styles */
         appearance: none;
-        width: 100%;
+        width: 20vw;
         /* Full-width */
-        height: 25px;
+        height: 1vh;
         /* Specified height */
         background: #fff1e2;
         /* Grey background */
@@ -197,9 +208,9 @@
         -webkit-appearance: none;
         /* Override default look */
         appearance: none;
-        width: 25px;
+        width: 1.5vw;
         /* Set a specific slider handle width */
-        height: 25px;
+        height: 2.5vh;
         /* Slider handle height */
         background: #e64500;
         /* Green background */
@@ -208,9 +219,9 @@
     }
 
     .slider::-moz-range-thumb {
-        width: 25px;
+        width: 2.5vw;
         /* Set a specific slider handle width */
-        height: 25px;
+        height: 2.5vh;
         /* Slider handle height */
         background: #aa3904;
         /* Green background */
