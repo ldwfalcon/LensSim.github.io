@@ -1,3 +1,16 @@
+(function () {
+    const canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d');
+
+    // resize the canvas to fill browser window dynamically
+    window.addEventListener('resize', resizeCanvas, false);
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth + 50;
+        canvas.height = window.innerHeight + 50;
+    }
+    resizeCanvas();
+})();
 prevx = 0;
 prevy = 0;
 prevx2 = 0;
@@ -608,20 +621,7 @@ const CollisionTypes = Object.freeze({
 });
 let gravity = false;
 
-let currentCollisionType = CollisionTypes.push;
 
-function switchCollisionType() {
-    let label = document.getElementById("switchCollisionLabel");
-    if (currentCollisionType === CollisionTypes.bounce) {
-        currentCollisionType = CollisionTypes.push;
-        label.textContent = "Push"
-    }
-    else {
-        currentCollisionType = CollisionTypes.bounce;
-        label.textContent = "Bounce"
-    }
-}
-document.getElementById("switchCollision").onclick = switchCollisionType;
 
 const maxSpeed = 150;
 const c = document.getElementById("canvas");
@@ -637,7 +637,6 @@ let medium2 = [];
 function createPushingExample() {
     let labelCollision = document.getElementById("switchCollisionLabel");
     currentCollisionType = CollisionTypes.push;
-    labelCollision.textContent = "Push";
 
     objects = [];
     light = [];
