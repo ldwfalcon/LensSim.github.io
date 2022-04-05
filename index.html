@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+    </html>
 
-</html>
 
 <head>
 
@@ -19,23 +19,29 @@
 </head>
 
 <div id="container-left">
+    <div class="pair">
+        <input class="button" id="switchCollision" type="button" value="Switch Collision Type" />
+       <br>
+       <label class="label" id="switchCollisionLabel" for="switchCollision">Push</label>
+    </div>
     <div class="slidecontainer">
         <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
         <p style="margin: 0.1em;">Lens Radius: <span id="rad"></span></p>
-      </div>
-      <div class="slidecontainer">
+    </div>
+    <div class="slidecontainer">
         <input type="range" min="5" max="15" value="10" class="slider" id="densitySliderRange">
         <p style="margin: 0.1em;">Density: <span id="dens"></span></p>
-      </div>
-      <div class="slidecontainer">
-        <input style="direction: rtl;" type="range" min="250" max="650" value="450" class="slider" id="widthSliderRange">
+    </div>
+    <div class="slidecontainer">
+        <input style="direction: rtl;" type="range" min="250" max="650" value="450" class="slider"
+            id="widthSliderRange">
         <p style="margin: 0.1em;">Lens Width: <span id="wid"></span></p>
-      </div>
-      <div class="slidecontainer">
-          
-        <input type="range" min="0.5" max="2.5" value="2" class="slider" id="overlapSliderRange"step="0.01">
+    </div>
+    <div class="slidecontainer">
+
+        <input type="range" min="0.5" max="2.5" value="2" class="slider" id="overlapSliderRange" step="0.01">
         <p style="margin: 0.1em;">Overlap: <span id="ove"></span></p>
-      </div>
+    </div>
 </div>
 
 
@@ -55,5 +61,3 @@
 
 <script type="text/javascript" src="tester.js"></script>
 
-
-  
