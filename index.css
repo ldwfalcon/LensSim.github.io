@@ -1,11 +1,10 @@
-    * {
+* {
         /* to remove the top and left whitespace */
         margin: 5;
         padding: 5;
     }
 
-    html,
-    body {
+    html,body {
         /* just to be sure these are full screen*/
         width: 100%;
         height: 100%;
@@ -98,6 +97,7 @@
     }
 
     .slidecontainer {
+      padding: 0.2em;
         width: 20vw;
         /* Width of the outside container */
     }
