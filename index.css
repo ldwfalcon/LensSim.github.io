@@ -232,6 +232,9 @@ input:checked + .slide:before {
   transform: translateX(120px);
 } 
 #header a.navbar {
+  font-family: open_dyslexic;
+  font-size: 1.75vh;
+  color:#ffffff;
 	-ms-transition: transform 0.2s cubic-bezier(0.29, 0.02, 0.59, 0.87);
 	-webkit-transition: transform 0.2s cubic-bezier(0.29, 0.02, 0.59, 0.87);
 	transition: transform 0.2s cubic-bezier(0.29, 0.02, 0.59, 0.87);
