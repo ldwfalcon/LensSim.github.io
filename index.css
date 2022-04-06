@@ -208,7 +208,7 @@
 
   position:relative;
   padding:10px;
-  padding-left:4vw;
+  padding-left:4.5vw;
 }
 
 input:checked + .slide:after {
