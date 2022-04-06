@@ -11,11 +11,10 @@
 </head>
 <body>
 <div id="container-left">
-    <div class="pair">
-        <input class="button" id="switchCollision" type="button" value="Switch Collision Type" />
-       <br>
-       <label class="label" id="switchCollisionLabel" for="switchCollision">Push</label>
-    </div>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slide"></span>
+      </label>
     <div class="slidecontainer">
         <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
         <p style="margin: 0.1em;">Lens Radius: <span id="rad"></span></p>
@@ -32,10 +31,6 @@
         <input type="range" min="0.5" max="2.5" value="2" class="slider" id="overlapSliderRange" step="0.01">
         <p style="margin: 0.1em;">Overlap: <span id="ove"></span></p>
     </div>
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slide"></span>
-      </label>
 </div>
 
 
