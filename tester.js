@@ -11,52 +11,54 @@
     }
     resizeCanvas();
 })();
-prevx = 0;
-prevy = 0;
-prevx2 = 0;
-prevy2 = 0;
-prevx3 = 0;
-prevy3 = 0;
-prevxx = 0;
-prevyy = 0;
-prevx22 = 0;
-prevy22 = 0;
-prevx33 = 0;
-prevy33 = 0;
-prevX = [];
-prevY = [];
-prevXX = [];
-prevYY = [];
-lightSlope = 0;
-lightSlope2 = 0;
-lightSlopee = 0;
-lightSlope22 = 0;
-tempx = [];
-tempy = [];
-tempxx = [];
-tempyy = [];
-round = 0;
-xg = 0;
-yg = 0;
-t = [];
-l = [];
-x1 = 0;
-x2 = 0;
-y1 = 0;
-y2 = 0;
-x11 = 0;
-x22 = 0;
-y11 = 0;
-y22 = 0;
-a = 0;
-top = 0;
-bottom = 0;
-lightYstart2 = 0;
-lightYstart22 = 0;
-xrow = 0;
-yrow = 0;
-rowLength = 0;
-
+function allVars() {
+    prevx = 0;
+    prevy = 0;
+    prevx2 = 0;
+    prevy2 = 0;
+    prevx3 = 0;
+    prevy3 = 0;
+    prevxx = 0;
+    prevyy = 0;
+    prevx22 = 0;
+    prevy22 = 0;
+    prevx33 = 0;
+    prevy33 = 0;
+    prevX = [];
+    prevY = [];
+    prevXX = [];
+    prevYY = [];
+    lightSlope = 0;
+    lightSlope2 = 0;
+    lightSlopee = 0;
+    lightSlope22 = 0;
+    tempx = [];
+    tempy = [];
+    tempxx = [];
+    tempyy = [];
+    round = 0;
+    xg = 0;
+    yg = 0;
+    t = [];
+    l = [];
+    x1 = 0;
+    x2 = 0;
+    y1 = 0;
+    y2 = 0;
+    x11 = 0;
+    x22 = 0;
+    y11 = 0;
+    y22 = 0;
+    a = 0;
+    top = 0;
+    bottom = 0;
+    lightYstart2 = 0;
+    lightYstart22 = 0;
+    xrow = 0;
+    yrow = 0;
+    rowLength = 0;
+}
+allVars();
 function vars() {
     var sliderRange2 = document.getElementById("densitySliderRange");
     var output2 = document.getElementById("dens");
@@ -710,12 +712,20 @@ function removeTimer(event) {
     }
     timerFlag = false;
 }
-
+function clearer() {
+    var command = document.getElementById("clear");
+    console.log(111);
+    ctx.clearRect(0, 0, c.width, c.height);
+    allVars();
+    vars();
+    window.cancelAnimationFrame(animate);
+}
 /** This function is ran with every animation frame and each time clears canvas, updates coordinates of all objects,
  * resolves collisions of objects and edges of canvas , resolves collisions between objects and finally draws all of them. */
 function animate() {
     vars();
     ctx.clearRect(0, 0, c.width, c.height);
+
 
 
     for (let o of light) {
