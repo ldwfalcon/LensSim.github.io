@@ -29,15 +29,11 @@
     <script>
         var elt = document.getElementById('calculator');
         var calculator = Desmos.GraphingCalculator(elt);
-        calculator.setExpression({
-        "id": "8",
-        "type": "expression",
-        "latex": "O=0y-d_o\\space\\left\\{0<y<h_o\\right\\}",
-        "color": "#c74440"});
+        //calculator.setExpression({ "id": "8", "type": "expression", "latex": "y=x^2", "color": "#c74440"});
         
         // Save the current state of a calculator instance
-    </script>
-
+        Calc.setState(JSON.parse('{\"version\":9,\"randomSeed\":\"e0037e7f9dc0ac7f1d5c5d94f614f837\",\"graph\":{\"viewport\":{\"xmin\":-10,\"ymin\":-4.193548387096774,\"xmax\":10,\"ymax\":4.193548387096774}},\"expressions\":{\"list\":[{\"type\":\"expression\",\"id\":\"1\",\"color\":\"#c74440\",\"latex\":\"y=mx+b\",\"parametricDomain\":{\"min\":\"0\",\"max\":\"10\"},\"domain\":{\"min\":\"0\",\"max\":\"10\"}},{\"type\":\"expression\",\"id\":\"3\",\"color\":\"#fa7e19\",\"latex\":\"m=1\",\"slider\":{\"animationPeriod\":8000},\"parametricDomain\":{\"min\":\"0\",\"max\":\"10\"},\"domain\":{\"min\":\"0\",\"max\":\"10\"}},{\"type\":\"expression\",\"id\":\"2\",\"color\":\"#6042a6\",\"latex\":\"b=1\",\"slider\":{\"animationPeriod\":8000},\"parametricDomain\":{\"min\":\"0\",\"max\":\"10\"},\"domain\":{\"min\":\"0\",\"max\":\"10\"}}]}}'));
+            </script>
 </body>
 
 </html>
