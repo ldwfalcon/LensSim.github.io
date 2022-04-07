@@ -19,8 +19,9 @@
                             alt="Light Simulation Logo" width="50vw" height="50vw"
                             style="position: relative; right:00px;top:0px; "></a>
                     <a class="navbar" href="index.html" style="position: relative;top:-2.5vh; ">Home </a>
-                    <a class="navbar" href="mainGraph.html" style="position: relative;top:-2.5vh;">Using Snell's Law</a>
-                    <a class="navbar" href="MainSim.html" style="position: relative;top:-2.5vh;">Shadow</a>
+                    <a class="navbar" href="MainSim.html" style="position: relative;top:-2.5vh;">Sim as Graph</a>
+                    <a class="navbar" href="mainGraph.html" style="position: relative;top:-2.5vh;">Focal Point Graph</a>
+                    <a class="navbar" href="shadowGraph.html" style="position: relative;top:-2.5vh;">Shadow</a>
                 </nav>
                 <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
             </div>
@@ -53,7 +54,7 @@
 
     <div id="container-right">
         <input class="button" id="pushExample" type="button" value="Start" />
-        <input class="button" id="clear" type="button" value="clear" />
+        <input class="button" id="clear" onclick="clearer()"type="button" value="clear" />
 
         <div style="text-align: center;"><b>Click and Hold to Create Circles (Hold Duration = Size </b></div>
         <p id="demo"></p>
