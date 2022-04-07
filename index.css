@@ -4,8 +4,10 @@
         padding: 5;
     }
     img{
+
       border-radius: 5vh;
-    }
+
+        }
     html,body {
         /* just to be sure these are full screen*/
         width: 100%;
@@ -13,6 +15,13 @@
         background-color: rgb(0, 0, 0);
         color: rgb(198, 255, 177);
 
+    }
+    h1{
+      display: inline-block;
+      vertical-align: top;
+      margin: 2vw;
+
+      color: rgb(255, 255, 255);
     }
 
     canvas {
