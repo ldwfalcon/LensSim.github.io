@@ -84,7 +84,7 @@
 
     .button:hover {
         border-radius: 5px;
-        background-color: #605d4b;
+        background-color: #a63737;
         color: white;
     }
 
@@ -180,7 +180,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: red;
+  background-color: rgb(156, 28, 28);
   -webkit-transition: .4s;
   transition: .4s;
   display:flex;
@@ -233,7 +233,7 @@ input:checked + .slide:before {
 } 
 #header a.navbar {
   font-family: open_dyslexic;
-  font-size: 1.75vh;
+  font-size: 2vh;
   color:#ffffff;
 	-ms-transition: transform 0.2s cubic-bezier(0.29, 0.02, 0.59, 0.87);
 	-webkit-transition: transform 0.2s cubic-bezier(0.29, 0.02, 0.59, 0.87);
@@ -241,7 +241,7 @@ input:checked + .slide:before {
 	position: relative;
 	display: inline-block;
 	padding: 5px;
-	margin: 0px 50px 0px;
+	margin: 0px 80px 0px;
 
 	-webkit-transform: scale(1);
     
@@ -301,7 +301,7 @@ input:checked + .slide:before {
 	content: "";
 	height: 0%;
 	width: 100%;
-	background: rgba(255, 255, 255, 1);
+	background: rgb(213, 150, 88);
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -319,7 +319,7 @@ input:checked + .slide:before {
 
 #header a.navbar:hover:before {
 
-	background: rgba(255, 255, 255, 1);
+	background: rgb(213, 150, 88,1);
 	border-radius: 0.5em;
 	height: 100%;
     
