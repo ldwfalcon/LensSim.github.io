@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="images/favicon/favicon.ico?">
+    <meta name="apple-mobile-web-app-title" content="Lens Simulation">
+    <meta name="application-name" content="Lens Simulation">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header id="header">
+        <div class="inner">
+            <nav align="center" id="nav" style="position: relative; top:-50px;">
+                <a class="img-button" href="index.html" id="myButton"><img src="images/LightSimLogooo-01.png"
+                        alt="Light Simulation Logo" width="100px" height="100px"
+                        style="position: relative; right:00px;top:50px; "></a>
+                        <a class="navbar" href="index.html" style="position: relative;top:-2.5vh; ">Home </a>
+                        <a class="navbar" href="MainSim.html" style="position: relative;top:-2.5vh;">Sim as Graph</a>
+                        <a class="navbar" href="mainGraph.html" style="position: relative;top:-2.5vh;">Focal Point Graph</a>
+                        <a class="navbar" href="shadowGraph.html" style="position: relative;top:-2.5vh;">Shadow</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+    <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <div id="calculator" style="width: 75vw; height: 75vh; position:relative; left: 10vw;"></div>
+    <script>
+        var elt = document.getElementById('calculator');
+        var calculator = Desmos.GraphingCalculator(elt);
+        calculator.setState(JSON.parse('{\"version\":9,\"randomSeed\":\"92a04caa67092ed66fb9d2f5c7fbd101\",\"graph\":{\"viewport\":{\"xmin\":-25.976206233932064,\"ymin\":-14.179899606468275,\"xmax\":153.89679905750015,\"ymax\":61.43203910978901},\"showGrid\":false,\"showXAxis\":false,\"showYAxis\":false,\"xAxisMinorSubdivisions\":1,\"yAxisMinorSubdivisions\":1,\"xAxisNumbers\":false,\"yAxisNumbers\":false,\"polarNumbers\":false},\"expressions\":{\"list\":[{\"type\":\"folder\",\"id\":\"33\",\"title\":\"the complex stuff\",\"collapsed\":true},{\"type\":\"expression\",\"id\":\"3\",\"folderId\":\"33\",\"color\":\"#2d70b3\",\"latex\":\"x=d\\\\left\\\\{h_{1}<y<h_{2}\\\\right\\\\}\",\"lineWidth\":\"10\"},{\"type\":\"expression\",\"id\":\"7\",\"folderId\":\"33\",\"color\":\"#2d70b3\",\"latex\":\"w=\\\\operatorname{abs}\\\\left(h_{1}-h_{2}\\\\right)\"},{\"type\":\"expression\",\"id\":\"11\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"o=d+c\"},{\"type\":\"expression\",\"id\":\"21\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"x=o\\\\left\\\\{0\\\\le y\\\\le k+25\\\\right\\\\}\",\"lineWidth\":\"5\"},{\"type\":\"expression\",\"id\":\"12\",\"folderId\":\"33\",\"color\":\"#fa7e19\",\"latex\":\"y=mx+p\\\\left\\\\{0\\\\le x\\\\le o\\\\right\\\\}\\\\left\\\\{0\\\\le y\\\\right\\\\}\",\"lineWidth\":\"t\"},{\"type\":\"expression\",\"id\":\"13\",\"folderId\":\"33\",\"color\":\"#fa7e19\",\"latex\":\"y=-mx+p\\\\left\\\\{0\\\\le x\\\\le o\\\\right\\\\}\\\\left\\\\{0\\\\le y\\\\right\\\\}\",\"lineWidth\":\"t\"},{\"type\":\"expression\",\"id\":\"30\",\"folderId\":\"33\",\"color\":\"#fa7e19\",\"latex\":\"y=-\\\\left(m+0.1\\\\right)x+p\\\\left\\\\{0\\\\le x\\\\le o\\\\right\\\\}\\\\left\\\\{0\\\\le y\\\\right\\\\}\",\"lineWidth\":\"t\"},{\"type\":\"expression\",\"id\":\"29\",\"folderId\":\"33\",\"color\":\"#fa7e19\",\"latex\":\"y=-\\\\left(m+0.2\\\\right)x+p\\\\left\\\\{0\\\\le x\\\\le o\\\\right\\\\}\\\\left\\\\{0\\\\le y\\\\right\\\\}\",\"lineWidth\":\"t\"},{\"type\":\"expression\",\"id\":\"16\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"m=\\\\frac{\\\\left(h_{2}-p\\\\right)}{d}\"},{\"type\":\"expression\",\"id\":\"24\",\"folderId\":\"33\",\"color\":\"#6042a6\",\"latex\":\"w_{1}=mo+p\"},{\"type\":\"expression\",\"id\":\"22\",\"folderId\":\"33\",\"color\":\"#2d70b3\",\"latex\":\"w_{2}=-mo+p\"},{\"type\":\"expression\",\"id\":\"15\",\"folderId\":\"33\",\"color\":\"#000000\",\"latex\":\"p=h_{1}+\\\\frac{w}{2}\"},{\"type\":\"expression\",\"id\":\"23\",\"folderId\":\"33\",\"color\":\"#388c46\",\"latex\":\"k_{1}=\\\\operatorname{abs}\\\\left(w_{1}-w_{2}\\\\right)\"},{\"type\":\"expression\",\"id\":\"26\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"k=\\\\operatorname{abs}\\\\left(\\\\left(\\\\frac{\\\\left(h_{2}-\\\\left(h_{1}+\\\\frac{\\\\left(\\\\operatorname{abs}\\\\left(h_{1}-h_{2}\\\\right)\\\\right)}{2}\\\\right)\\\\right)}{d}\\\\left(d+c\\\\right)+\\\\left(h_{1}+\\\\frac{\\\\left(\\\\operatorname{abs}\\\\left(h_{1}-h_{2}\\\\right)\\\\right)}{2}\\\\right)\\\\right)-\\\\left(-\\\\frac{\\\\left(h_{2}-\\\\left(h_{1}+\\\\frac{\\\\left(\\\\operatorname{abs}\\\\left(h_{1}-h_{2}\\\\right)\\\\right)}{2}\\\\right)\\\\right)}{d}\\\\left(d+c\\\\right)+\\\\left(h_{1}+\\\\frac{\\\\left(\\\\operatorname{abs}\\\\left(h_{1}-h_{2}\\\\right)\\\\right)}{2}\\\\right)\\\\right)\\\\right)\"},{\"type\":\"expression\",\"id\":\"27\",\"folderId\":\"33\",\"color\":\"#2d70b3\",\"latex\":\"-mx+p<y<mx+p\\\\left\\\\{d<x<o\\\\right\\\\}\"},{\"type\":\"expression\",\"id\":\"28\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"\\\\left(115,k\\\\right)\",\"showLabel\":true,\"pointStyle\":\"OPEN\",\"dragMode\":\"X\",\"labelSize\":\"2\",\"labelOrientation\":\"above\"},{\"type\":\"expression\",\"id\":\"32\",\"folderId\":\"33\",\"color\":\"#6042a6\",\"latex\":\"h_{2}=h_{object}\"},{\"type\":\"expression\",\"id\":\"6\",\"folderId\":\"33\",\"color\":\"#c74440\",\"latex\":\"h_{1}=10\",\"slider\":{\"hardMin\":true,\"hardMax\":true,\"min\":\"0\",\"max\":\"50\"}},{\"type\":\"expression\",\"id\":\"35\",\"folderId\":\"33\",\"color\":\"#2d70b3\",\"latex\":\"d=d_{objectLight}\"},{\"type\":\"expression\",\"id\":\"36\",\"folderId\":\"33\",\"color\":\"#388c46\",\"latex\":\"c=d_{objectWall}\"},{\"type\":\"expression\",\"id\":\"31\",\"folderId\":\"33\",\"color\":\"#388c46\",\"latex\":\"t=4.2\"},{\"type\":\"expression\",\"id\":\"2\",\"color\":\"#2d70b3\",\"latex\":\"d_{objectLight}=36\",\"slider\":{\"hardMax\":true,\"max\":\"40\"}},{\"type\":\"expression\",\"id\":\"10\",\"color\":\"#000000\",\"latex\":\"h_{object}=28.5\",\"hidden\":true,\"slider\":{\"hardMin\":true,\"hardMax\":true,\"min\":\"0\",\"max\":\"50\"}},{\"type\":\"expression\",\"id\":\"19\",\"color\":\"#2d70b3\",\"latex\":\"d_{objectWall}=40\",\"hidden\":true,\"slider\":{\"hardMin\":true,\"hardMax\":true,\"min\":\"0\",\"max\":\"40\"}},{\"type\":\"expression\",\"id\":\"37\",\"color\":\"#6042a6\",\"latex\":\"\\\"Thank\\\\ you\\\\ Kaly\\\\ \\\\operatorname{for}\\\\ making\\\\ this\\\"\"}]}}'));
+           //JSON.stringify(Calc.getState())
+           </script>
+</body>
+
+</html>
