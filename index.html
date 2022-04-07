@@ -9,58 +9,64 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    <header id="header">
-		<div class="inner">
-			<nav align="center" id="nav" style="position: relative; top:50px;">
-				<a class="img-button" href="index.html" id="myButton"><img src="images/LightSimLogooo-01.png" alt="Light Simulation Logo" width="100px" height="100px" style="position: relative; right:00px;top:50px; "></a>
-				<a class="navbar" href="index.html">Home</a>
-				<a class="navbar" href="mainGraph.html">Using Snell's Law</a>
-				<a class="navbar" href="index.html">Shadow</a>
-			</nav>
-			<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-		</div>
-	</header>
-    
-<div id="container-left">
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slide"></span>
-      </label>
-    <div class="slidecontainer">
-        <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
-        <p style="margin: 0.1em;">Lens Radius: <span id="rad"></span></p>
+    <div>
+        <header id="header">
+            <div class="inner">
+                <nav align="center" id="nav" style="position: relative; top:0px;">
+                    <a class="img-button" href="index.html" id="myButton"><img src="images/LightSimLogooo-01.png"
+                            alt="Light Simulation Logo" width="50vw" height="50vw"
+                            style="position: relative; right:00px;top:0px; "></a>
+                    <a class="navbar" href="index.html" style="position: relative;top:-2.5vh; ">Home </a>
+                    <a class="navbar" href="mainGraph.html" style="position: relative;top:-2.5vh;">Using Snell's Law</a>
+                    <a class="navbar" href="index.html" style="position: relative;top:-2.5vh;">Shadow</a>
+                </nav>
+                <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+            </div>
+        </header>
     </div>
-    <div class="slidecontainer">
-        <input type="range" min="5" max="15" value="10" class="slider" id="densitySliderRange">
-        <p style="margin: 0.1em;">Density: <span id="dens"></span></p>
+    <div id="container-left">
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slide"></span>
+        </label>
+        <div class="slidecontainer">
+            <input type="range" min="250" max="450" value="350" class="slider" id="radiusSliderRange">
+            <p style="margin: 0.1em;">Lens Radius: <span id="rad"></span></p>
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="5" max="15" value="10" class="slider" id="densitySliderRange">
+            <p style="margin: 0.1em;">Density: <span id="dens"></span></p>
+        </div>
+        <div class="slidecontainer">
+            <input style="direction: rtl;" type="range" min="250" max="650" value="450" class="slider"
+                id="widthSliderRange">
+            <p style="margin: 0.1em;">Lens Width: <span id="wid"></span></p>
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="0.5" max="2.5" value="2" class="slider" id="overlapSliderRange" step="0.01">
+            <p style="margin: 0.1em;">Overlap: <span id="ove"></span></p>
+        </div>
     </div>
-    <div class="slidecontainer">
-        <input style="direction: rtl;" type="range" min="250" max="650" value="450" class="slider" id="widthSliderRange">
-        <p style="margin: 0.1em;">Lens Width: <span id="wid"></span></p>
+
+
+    <div id="container-right">
+        <input class="button" id="pushExample" type="button" value="Start" />
+        <input class="button" id="clear" type="button" value="clear" />
+
+        <div style="text-align: center;"><b>Click and Hold to Create Circles (Hold Duration = Size </b></div>
+        <p id="demo"></p>
+        <p id="demo2"></p>
+        <p id="demoo"></p>
+        <p id="demo22"></p>
+
     </div>
-    <div class="slidecontainer">
-        <input type="range" min="0.5" max="2.5" value="2" class="slider" id="overlapSliderRange" step="0.01">
-        <p style="margin: 0.1em;">Overlap: <span id="ove"></span></p>
-    </div>
-</div>
+    <canvas id="canvas">
+    </canvas>
 
-
-<div id="container-right">
-    <input class="button" id="pushExample" type="button" value="Start" />
-    <input class="button" id="clear" type="button" value="clear" />
-
-    <div style="text-align: center;"><b>Click and Hold to Create Circles (Hold Duration = Size </b></div>
-    <p id="demo"></p>
-    <p id="demo2"></p>
-    <p id="demoo"></p>
-    <p id="demo22"></p>
-
-</div>
-<canvas id="canvas">
-</canvas>
-
-<script type="text/javascript" src="tester.js"></script>
+    <script type="text/javascript" src="tester.js"></script>
 
 </body>
+
 </html>
