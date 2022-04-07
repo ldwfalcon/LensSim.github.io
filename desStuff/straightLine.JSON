@@ -1,0 +1,101 @@
+[
+    {
+        "id": "1",
+        "type": "expression",
+        "latex": "y=mx+b",
+        "color": "#c74440",
+        "lineStyle": "SOLID",
+        "lineWidth": "",
+        "lineOpacity": "",
+        "pointStyle": "POINT",
+        "pointSize": "",
+        "pointOpacity": "",
+        "fillOpacity": "0.4",
+        "hidden": false,
+        "secret": false,
+        "dragMode": "AUTO",
+        "label": "",
+        "showLabel": false,
+        "labelSize": "medium",
+        "labelOrientation": "default",
+        "interactiveLabel": false,
+        "parametricDomain": {
+            "min": "0",
+            "max": "10"
+        },
+        "polarDomain": {
+            "min": "",
+            "max": ""
+        },
+        "domain": {
+            "min": "0",
+            "max": "10"
+        }
+    },
+    {
+        "id": "3",
+        "type": "expression",
+        "latex": "m=1",
+        "color": "#fa7e19",
+        "lineStyle": "SOLID",
+        "lineWidth": "",
+        "lineOpacity": "",
+        "pointStyle": "POINT",
+        "pointSize": "",
+        "pointOpacity": "",
+        "fillOpacity": "0.4",
+        "hidden": false,
+        "secret": false,
+        "dragMode": "AUTO",
+        "label": "",
+        "showLabel": false,
+        "labelSize": "medium",
+        "labelOrientation": "default",
+        "interactiveLabel": false,
+        "parametricDomain": {
+            "min": "0",
+            "max": "10"
+        },
+        "polarDomain": {
+            "min": "",
+            "max": ""
+        },
+        "domain": {
+            "min": "0",
+            "max": "10"
+        }
+    },
+    {
+        "id": "2",
+        "type": "expression",
+        "latex": "b=1",
+        "color": "#6042a6",
+        "lineStyle": "SOLID",
+        "lineWidth": "",
+        "lineOpacity": "",
+        "pointStyle": "POINT",
+        "pointSize": "",
+        "pointOpacity": "",
+        "fillOpacity": "0.4",
+        "hidden": false,
+        "secret": false,
+        "dragMode": "AUTO",
+        "label": "",
+        "showLabel": false,
+        "labelSize": "medium",
+        "labelOrientation": "default",
+        "interactiveLabel": false,
+        "parametricDomain": {
+            "min": "0",
+            "max": "10"
+        },
+        "polarDomain": {
+            "min": "",
+            "max": ""
+        },
+        "domain": {
+            "min": "0",
+            "max": "10"
+        }
+    }
+]
